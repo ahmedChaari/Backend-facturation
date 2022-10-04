@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuotationsTable extends Migration
+class CreateCustomerTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateQuotationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('quotations', function (Blueprint $table) {
+        Schema::create('customer_types', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('company_id');
-            $table->string('commercial');
-            $table->foreignUuid('customer_id');
-            $table->date('date_devis');
-            $table->integer('remise');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateQuotationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quotations');
+        Schema::dropIfExists('customer_types');
     }
 }

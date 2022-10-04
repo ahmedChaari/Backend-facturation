@@ -17,8 +17,8 @@ class CreateDemandPricesTable extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('company_id');
             $table->date('date_demand_price');
-            //responsable
-            $table->foreignUuid('vendor_id');  // fournisseur
+            $table->foreignUuid('customer_id'); // responsable
+            $table->foreignUuid('vendor_id');   // fournisseur
             $table->timestamps();
         });
     }

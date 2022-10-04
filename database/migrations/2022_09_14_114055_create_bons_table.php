@@ -27,6 +27,7 @@ class CreateBonsTable extends Migration
             $table->enum('mode_relement',['ES','CQ','VR','CB','EF']); // ESPACE , CHEQUE , VERMENT , CARTE BANCAIRE , effet
             $table->integer('remise');
             $table->timestamps();
+            ///non non
         });
     }
 

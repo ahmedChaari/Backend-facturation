@@ -16,7 +16,8 @@ class CreateRolesTable extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('role_type');
+            $table->text('descreption');
+           // $table->string('role_type');
            // $table->enum('role_type',['SA','AD','CO','EQ','CL']); // SUPER ADMIN or ADMIN or comptable or equipier or client
             $table->softDeletes();
             $table->timestamps();

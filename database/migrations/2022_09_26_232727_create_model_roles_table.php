@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDepositsTable extends Migration
+class CreateModelRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,23 @@ class CreateDepositsTable extends Migration
      */
     public function up()
     {
-        Schema::create('deposits', function (Blueprint $table) {
+        Schema::create('model_roles', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('company_id');
             $table->string('name');
+            $table->foreignUuid('role_id');
+            $table->boolean('consulter');
+            $table->boolean('ajouter');
+            $table->boolean('modifier');
+            $table->boolean('valider');
+            $table->boolean('supprimer');
+            $table->boolean('imprimer');
+            $table->boolean('exporter');
+            $table->boolean('annuler');
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -27,6 +37,6 @@ class CreateDepositsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deposits');
+        Schema::dropIfExists('model_roles');
     }
 }

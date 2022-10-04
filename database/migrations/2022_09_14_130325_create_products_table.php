@@ -31,7 +31,7 @@ class CreateProductsTable extends Migration
             $table->string('rayon_a');
             $table->string('rayon_b');
             $table->foreignUuid('deposit_id');
-            $table->integer('quantite');
+            $table->integer('quantite_initial');
             $table->text('description');
             $table->timestamps();
         });
