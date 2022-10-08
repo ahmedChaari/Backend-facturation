@@ -1,0 +1,64 @@
+parametrage
+    table de reference
+    gestion des profiles
+    parametrage general
+    sessions
+    modele pdf
+entreprise 
+utilisateur
+stock
+    list des produit
+    list des depots
+    bon entree
+    bon des sortie
+    bon de transfert
+    histoire des mouvements
+    mon stock
+    inventaire
+    produit a commander
+achat
+    list des fournisseurs
+    demande de prix
+    bon de commande
+    bon de reception
+    facture d'achat
+    bon de retour
+vent
+    liste des clients
+    devis
+    bon de livraison
+    facture
+    bon de retour
+    avoir
+tresorerie
+    encaissement client
+    encaissement fournisseur
+    historique paiements client
+    calendrier
+statistique
+    journal de vente
+    journal des achats
+    reporting par commercial
+    reporting par client
+    reporting par produit
+    reporting par fornisseur
+    situation client
+    situation fornisseur
+depence
+    categorie depence
+    depence
+credit
+    credit client
+    credirt fournisseur
+
+
+
+
+
+
+
+
+
+
+
+
