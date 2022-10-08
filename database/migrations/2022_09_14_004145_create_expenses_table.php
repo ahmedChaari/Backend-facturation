@@ -17,7 +17,7 @@ class CreateExpensesTable extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('company_id');
             $table->date('date_expense');
-            $table->enum('mode_payment',['ES','CQ','VR','CB','EF']); // ESPACE , CHEQUE , VERMENT , CARTE BANCAIRE , effet
+            $table->foreignUuid('mode_payment_id'); 
             $table->integer('montant');
             $table->foreignUuid('expense_type_id');
             $table->date('date_echeance');
