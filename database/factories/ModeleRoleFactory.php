@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ModeleRoleFactory extends Factory

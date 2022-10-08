@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CategoryFactory extends Factory
@@ -14,9 +15,9 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'id'         => $this->faker->uuid,
-            'company_id' => Company::all()->random()->id,
-            'name'       => $this->faker->name,
+            'id'          => $this->faker->uuid,
+            'company_id'  => Company::all()->random()->id,
+            'name'        => $this->faker->name,
         ];
     }
 }

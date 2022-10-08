@@ -16,7 +16,8 @@ class CreateModelRolesTable extends Migration
         Schema::create('model_roles', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('company_id');
-            $table->string('name');
+            $table->string('model');
+            $table->string('SousModel');
             $table->foreignUuid('role_id');
             $table->boolean('consulter');
             $table->boolean('ajouter');

@@ -24,7 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->string('patent');
             $table->string('cnss');
             $table->string('activite');
-            $table->string('gerant');
+            //$table->string('gerant');
             $table->string('contact');
             $table->text('adresse');
             $table->integer('tel');
