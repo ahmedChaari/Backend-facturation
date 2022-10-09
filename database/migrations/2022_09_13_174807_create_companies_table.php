@@ -33,6 +33,7 @@ class CreateCompaniesTable extends Migration
             $table->string('email')->nullable();
             $table->string('web')->nullable();
             $table->string('logo')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -22,12 +22,13 @@ class CreateUsersTable extends Migration
             $table->text('adresse')->nullable();
             $table->string('pseudo')->nullable();
             $table->foreignUuid('role_id');
-            $table->foreignUuid('deposit_id');
+            $table->foreignUuid('deposit_id')->nullable();
             $table->foreignUuid('user_id')->nullable(); // create by user auth
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

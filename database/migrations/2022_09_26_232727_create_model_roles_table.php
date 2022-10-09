@@ -27,6 +27,7 @@ class CreateModelRolesTable extends Migration
             $table->boolean('imprimer');
             $table->boolean('exporter');
             $table->boolean('annuler');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ class CompanySeeder extends Seeder
     {
       Company::create([
            'name'              =>   'Mind-Com',
-           'date_creation'     =>   '01-02-2018',
+           'date_creation'     =>   '2018-02-11',
            'ICE'               =>   '123456789000057',
            'fiscale'           =>   '50189274',
            'registre_commerce' =>   '132741',
@@ -35,7 +35,7 @@ class CompanySeeder extends Seeder
 
     Company::create([
         'name'              =>   'moda-dis',
-        'date_creation'     =>   '01-02-2015',
+        'date_creation'     =>   '2015-12-23',
         'ICE'               =>   '234556789000057',
         'fiscale'           =>   '12189274',
         'registre_commerce' =>   '902741',
@@ -53,7 +53,7 @@ class CompanySeeder extends Seeder
             ]);
     Company::create([
         'name'              =>   'jil-fer',
-        'date_creation'     =>   '01-02-2007',
+        'date_creation'     =>   '2007-03-06',
         'ICE'               =>   '433456789000057',
         'fiscale'           =>   '87189274',
         'registre_commerce' =>   '342741',
@@ -71,7 +71,7 @@ class CompanySeeder extends Seeder
             ]);
     Company::create([
         'name'              =>   'aycer',
-        'date_creation'     =>   '12-02-2020',
+        'date_creation'     =>   '2020-01-17',
         'ICE'               =>   '233456789000057',
         'fiscale'           =>   '40189274',
         'registre_commerce' =>   '932741',
