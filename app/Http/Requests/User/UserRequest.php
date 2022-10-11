@@ -30,10 +30,8 @@ class UserRequest extends FormRequest
             'gender'        => 'required',
             'adresse'       => 'required',
             'pseudo'        => 'required',
-            'role'          => 'required',
-            'user_id'       => 'required',
+            'role_id'          => 'required',
             'deposit_id'    => 'required',
-            'company'       => 'required',
             'password'      => 'required|string|confirmed',
         ];
     }

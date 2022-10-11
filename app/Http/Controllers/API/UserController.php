@@ -12,10 +12,10 @@ class UserController extends Controller
 {
     public function storeClient(UserRequest $request)
     {
-        $company  = Auth::user()->company_id;
-        // il faut chercher la milleur method 
-        $user     = Auth::user()->id;
-            $user = User::create([
+      //  $company  = Auth::user()->company_id;
+
+        $userId     = Auth::user()->id;
+        $user       = User::create([
                 'nom'        => $request['nom'],
                 'prenom'     => $request['prenom'], 
                 'email'      => $request['email'],
@@ -23,15 +23,23 @@ class UserController extends Controller
                 'adresse'    => $request['adresse'],
                 'pseudo'     => $request['pseudo'],
                 'role_id'    => $request['role_id'],
-                'user_id'    => $user,
+                'user_id'    => $userId,
                 'deposit_id' => $request['deposit_id'],
-                'company_id' => $company,
+              //  'company_id' => $company,
                 'password'   => bcrypt($request['password']),
             ]);
+
+
+
+          //  $comp = $request->tags;
+            //if (empty($comp)){}else{                        
+                
+            $companyArray = explode("," ,$request->companies);
+            $user->companies()->attach($companyArray);
       
         return response([
             $user,
-            'message'    => 'create the client of restaurant !',
+            'message'    => 'create a new client of company !',
             ], 200);   
     }
 }

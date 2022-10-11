@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,5 @@ Route::post('/login',               [AuthController::class,  'login'])->name('lo
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('logout',             [AuthController::class, 'logout']);
+    Route::post('storeClient',        [UserController::class, 'storeClient']);
 });
