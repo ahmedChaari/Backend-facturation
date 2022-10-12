@@ -121,10 +121,7 @@ class UserController extends Controller
             })
             ->paginate(10));
         return $users;
-        }
-          
-      
-       
+        }   
   }
 
     public function storeClient(UserRequest $request)
