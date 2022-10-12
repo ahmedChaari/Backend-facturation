@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Uuids;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -48,4 +49,17 @@ class User extends Authenticatable
       return $this->belongsToMany(Company::class);
      
     }
+    public function role(): ?BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
+    public function user(): ?BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function deposit(): ?BelongsTo
+    {
+        return $this->belongsTo(Deposit::class);
+    }
+
 }
