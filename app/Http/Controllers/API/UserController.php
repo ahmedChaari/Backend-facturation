@@ -18,20 +18,109 @@ class UserController extends Controller
     $role     =  $request->get('role');
     $depot    =  $request->get('depot');
 
+    // serch for all search name and role and depot
         if(isset($depot) && isset($query) && isset($role) ){
-          echo 'touuuuuuuuuuuuuuuuu';
+          $users = UserResource::collection(User::latest()
+          ->whereHas('companies', function ($query) use($company) {
+          $query->where('company_id', $company);
+            })
+            ->where( function($q) use ($query) {
+              $q->where('nom', 'LIKE',"%{$query}%");
+              $q->orWhere('prenom','LIKE', "%{$query}%");
+              })  
+              ->whereHas('role', function ($query) use($role) {
+                $query->where('name', $role);
+            }) 
+              ->whereHas('deposit', function ($query) use($depot) {
+                $query->where('name', $depot);
+                })
+            ->paginate(10));
+        return $users;
+         // serch for all search name  and depot
         }elseif(isset($depot) && isset($query)){
-          echo 'depot    search';
+          $users = UserResource::collection(User::latest()
+          ->whereHas('companies', function ($query) use($company) {
+          $query->where('company_id', $company);
+            })
+            ->where( function($q) use ($query) {
+              $q->where('nom', 'LIKE',"%{$query}%");
+              $q->orWhere('prenom','LIKE', "%{$query}%");
+              })  
+              ->whereHas('deposit', function ($query) use($depot) {
+                $query->where('name', $depot);
+                })
+            ->paginate(10));
+        return $users;
+         // serch for role and depot
         }elseif(isset($depot) && isset($role)){
-          echo 'role           depot';
+          $users = UserResource::collection(User::latest()
+          ->whereHas('companies', function ($query) use($company) {
+          $query->where('company_id', $company);
+            })
+            ->whereHas('role', function ($query) use($role) {
+              $query->where('name', $role);
+          }) 
+              ->whereHas('deposit', function ($query) use($depot) {
+                $query->where('name', $depot);
+                })
+            ->paginate(10));
+        return $users;
+         // serch for search name and role
         }elseif(isset($query) && isset($role)){
-          echo 'role           serch';
+          $users = UserResource::collection(User::latest()
+          ->whereHas('companies', function ($query) use($company) {
+          $query->where('company_id', $company);
+            })
+            ->where( function($q) use ($query) {
+              $q->where('nom', 'LIKE',"%{$query}%");
+              $q->orWhere('prenom','LIKE', "%{$query}%");
+              })  
+              ->whereHas('role', function ($query) use($role) {
+                $query->where('name', $role);
+            }) 
+            ->paginate(10));
+            return $users;
+             // serch for search name 
         }elseif(isset($query)) {
-            echo 'search';
+          $users = UserResource::collection(User::latest()
+          ->whereHas('companies', function ($query) use($company) {
+              $query->where('company_id', $company);
+                 })
+          ->where( function($q) use ($query) {
+              $q->where('nom', 'LIKE',"%{$query}%");
+              $q->orWhere('prenom','LIKE', "%{$query}%");
+              }) 
+        
+            ->paginate(10));
+        return $users;
+         // serch for role 
         }elseif(isset($role) && !isset($query)){
-            echo 'role';
+          $users = UserResource::collection(User::latest()
+          ->whereHas('companies', function ($query) use($company) {
+          $query->where('company_id', $company);
+            })
+              ->whereHas('role', function ($query) use($role) {
+                $query->where('name', $role);
+            }) 
+            ->paginate(10));
+             // serch for depot
         }elseif(isset($depot) && !isset($query) && !isset($role)){
-            echo 'depot';
+          $users = UserResource::collection(User::latest()
+          ->whereHas('companies', function ($query) use($company) {
+          $query->where('company_id', $company);
+            })
+           ->whereHas('deposit', function ($query) use($depot) {
+                $query->where('name', $depot);
+                })
+            ->paginate(10));
+      // get all user for company
+        }else{
+          $users = UserResource::collection(User::latest()
+          ->whereHas('companies', function ($query) use($company) {
+          $query->where('company_id', $company);
+            })
+            ->paginate(10));
+        return $users;
         }
           
       
