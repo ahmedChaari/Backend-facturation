@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\User\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -154,7 +155,7 @@ class UserController extends Controller
             'message'    => 'create a new client of company !',
             ], 200);   
     }
-    public function updateClient(Request $request,User $user){
+    public function updateClient(UpdateUserRequest $request,User $user){
 
       $user->update([   
         'nom'        => $request['nom'],
@@ -163,12 +164,12 @@ class UserController extends Controller
         'gender'     => $request['gender'],
         'adresse'    => $request['adresse'],
         'pseudo'     => $request['pseudo'],
-        'role_id'    => $request['role_id'],
         'deposit_id' => $request['deposit_id'],
         'password'   => bcrypt($request['password']),
     ]);
     return response([
-      $user,
+     
+      new  UserResource($user),
       'message'    => 'update a client of company !',
       ], 200); 
 

@@ -13,7 +13,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,12 +26,12 @@ class UpdateUserRequest extends FormRequest
         return [
             'nom'           => 'required',
             'prenom'        => 'required',
-            'email'         => 'required|string|unique:users,email',
+            'email'         => 'nullable|string|unique:users,email',
             'gender'        => 'required',
             'adresse'       => 'required',
             'pseudo'        => 'required',
-            'deposit_id'    => 'required',
-            'password'      => 'required|string|confirmed',
+            'deposit_id'    => 'nullable',
+            'password'      => 'nullable|string|confirmed',
         ];
     }
 }

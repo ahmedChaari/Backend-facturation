@@ -13,20 +13,21 @@ use Illuminate\Support\Facades\Route;
  *                                   *
  *************************************/
 
+
 Route::post('/login',               [AuthController::class,  'login'])->name('login.admin');
 
 
-/*************************************
- *      Protected routes Auth        *
- *                                   *
- *************************************/
+    /*************************************
+     *      Protected routes Auth        *
+     *                                   *
+     *************************************/
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
-    Route::post('logout',          [AuthController::class, 'logout']);
-
+    Route::post('logout',             [AuthController::class, 'logout']);
     //user controller
-    Route::post('storeClient',     [UserController::class, 'storeClient']);
-    Route::get('listUsers/{company}',        [UserController::class, 'listUsers']);
+    Route::post('storeClient',         [UserController::class, 'storeClient']);
+    Route::put('updateClient/{user}', [UserController::class, 'updateClient']);
+    Route::get('listUsers/{company}',  [UserController::class, 'listUsers']);
     
 });
