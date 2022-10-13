@@ -143,8 +143,6 @@ class UserController extends Controller
                 'password'   => bcrypt($request['password']),
             ]);
 
-
-
           //  $comp = $request->tags;
             //if (empty($comp)){}else{                        
                 
@@ -155,5 +153,24 @@ class UserController extends Controller
             $user,
             'message'    => 'create a new client of company !',
             ], 200);   
+    }
+    public function updateClient(Request $request,User $user){
+
+      $user->update([   
+        'nom'        => $request['nom'],
+        'prenom'     => $request['prenom'], 
+        'email'      => $request['email'],
+        'gender'     => $request['gender'],
+        'adresse'    => $request['adresse'],
+        'pseudo'     => $request['pseudo'],
+        'role_id'    => $request['role_id'],
+        'deposit_id' => $request['deposit_id'],
+        'password'   => bcrypt($request['password']),
+    ]);
+    return response([
+      $user,
+      'message'    => 'update a client of company !',
+      ], 200); 
+
     }
 }
