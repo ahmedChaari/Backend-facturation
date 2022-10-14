@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Route;
  *          Public routes            *
  *                                   *
  *************************************/
-
-
 Route::post('/login',               [AuthController::class,  'login'])->name('login.admin');
 
 
@@ -32,6 +30,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('listUsers/{company}',  [UserController::class, 'listUsers']);
 
     // depot controller
-    Route::post('storeDeposit',        [DepositController::class, 'storeDeposit']);
+    Route::post('storeDeposit',          [DepositController::class, 'storeDeposit']);
+    Route::get('listDeposits/{company}', [DepositController::class, 'listDeposits']);
+    Route::put('updateDeposit/{deposit}',[DepositController::class, 'updateDeposit']);
     
 });
