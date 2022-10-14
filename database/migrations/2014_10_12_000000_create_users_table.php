@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
            // $table->foreignUuid('company_id')->nullable();
             $table->string('nom');
             $table->string('prenom');
+            $table->string('path_image')->nullable();
             $table->enum('gender',['M','F'])->default('M');  // + male or female 
             $table->text('adresse')->nullable();
             $table->string('pseudo')->nullable();

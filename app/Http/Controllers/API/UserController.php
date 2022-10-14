@@ -9,6 +9,8 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -129,12 +131,23 @@ class UserController extends Controller
     {
       //  $company  = Auth::user()->company_id;
 
+
+      if ( $request->has('path_image')) {
+               //get the base-64 from data
+                $image = $request->path_image;
+                $image = base64_decode($image);
+                $safeName = Str::random(10).'.'.'png';
+            Storage::disk('public')->put('product/'.$safeName, $image);
+            $path = env('APP_URL').'/storage/product/'.$safeName;
+      }
+
         $userId     = Auth::user()->id;
         $user       = User::create([
                 'nom'        => $request['nom'],
                 'prenom'     => $request['prenom'], 
                 'email'      => $request['email'],
                 'gender'     => $request['gender'],
+                'path_image' => $path,
                 'adresse'    => $request['adresse'],
                 'pseudo'     => $request['pseudo'],
                 'role_id'    => $request['role_id'],
