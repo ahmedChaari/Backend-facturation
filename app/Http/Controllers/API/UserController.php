@@ -170,9 +170,21 @@ class UserController extends Controller
     }
     public function updateClient(UpdateUserRequest $request,User $user){
 
+
+      if ( $request->has('path_image')) {
+        //get the base-64 from data
+        
+        $image = $request->path_image;
+        $image = base64_decode($image);
+        
+        $safeName = Str::random(10).'.'.'png';
+        Storage::disk('public')->put('product/'.$safeName, $image);
+        $path = env('APP_URL').'/storage/product/'.$safeName;
+
       $user->update([   
         'nom'        => $request['nom'],
         'prenom'     => $request['prenom'], 
+        'path_image' => $path,
         'email'      => $request['email'],
         'gender'     => $request['gender'],
         'adresse'    => $request['adresse'],
@@ -180,6 +192,18 @@ class UserController extends Controller
         'deposit_id' => $request['deposit_id'],
         'password'   => bcrypt($request['password']),
     ]);
+  }else {
+    $user->update([   
+      'nom'        => $request['nom'],
+      'prenom'     => $request['prenom'], 
+      'email'      => $request['email'],
+      'gender'     => $request['gender'],
+      'adresse'    => $request['adresse'],
+      'pseudo'     => $request['pseudo'],
+      'deposit_id' => $request['deposit_id'],
+      'password'   => bcrypt($request['password']),
+  ]);
+  }
     return response([
      
       new  UserResource($user),

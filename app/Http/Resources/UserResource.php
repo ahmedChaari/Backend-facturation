@@ -25,6 +25,7 @@ class UserResource extends JsonResource
             'role'          => $this->role->name,
             'CRÉÉ PAR'      => $this->user,
             'DÉPOT'         => $this->deposit->name,
+            'path of image'    => $this->path_image,
             'DATE CRÉATION' => $this->created_at->format('m/d/Y'),
         ];
     }

@@ -29,7 +29,7 @@ class UpdateUserRequest extends FormRequest
             'email'         => 'nullable|string|unique:users,email',
             'gender'        => 'required',
             'adresse'       => 'required',
-            'pseudo'        => 'required',
+            'pseudo'        => 'nullable',
             'deposit_id'    => 'nullable',
             'password'      => 'nullable|string|confirmed',
         ];
