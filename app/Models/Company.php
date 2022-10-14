@@ -6,6 +6,7 @@ use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Company extends Model
@@ -19,4 +20,8 @@ class Company extends Model
       return $this->belongsToMany(User::class);
 
     }
+    public function deposits(): ?HasMany
+     {
+        return $this->hasMany(Deposit::class);
+     }
 }
