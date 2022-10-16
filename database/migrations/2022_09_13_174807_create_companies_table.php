@@ -14,7 +14,6 @@ class CreateCompaniesTable extends Migration
     public function up()
     {
         Schema::create('companies', function (Blueprint $table) {
-            //$table->id();
             $table->uuid('id')->primary();
             $table->string('name');
             $table->date('date_creation');
@@ -24,8 +23,9 @@ class CreateCompaniesTable extends Migration
             $table->string('patent');
             $table->string('cnss');
             $table->string('activite');
-            //$table->string('gerant');
+            $table->string('gerant');
             $table->string('contact');
+            $table->boolean('has_activated')->nullable()->default(true);
             $table->text('adresse');
             $table->integer('tel');
             $table->integer('tel_mobile');

@@ -41,8 +41,7 @@ class DepositController extends Controller
 
         $deposit->update([   
           'name'   => $request['name'],
-        ]);
-        
+        ]); 
       return response([
         new  DepositResource($deposit),
         'message'    => 'update a deposit of company !',

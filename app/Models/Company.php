@@ -14,6 +14,9 @@ class Company extends Model
     use Uuids ,HasFactory, SoftDeletes;
 
     protected $guarded = [];
+    protected $casts = [
+      'has_activated' => 'boolean',
+  ];
 
     public function users(): ?BelongsToMany
     {
