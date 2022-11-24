@@ -153,7 +153,7 @@ class UserController extends Controller
                 'role_id'    => $request['role_id'],
                 'user_id'    => $userId,
                 'deposit_id' => $request['deposit_id'],
-              //  'company_id' => $company,
+                // 'company_id' => $company,
                 'password'   => bcrypt($request['password']),
             ]);
 
@@ -211,4 +211,34 @@ class UserController extends Controller
       ], 200); 
 
     }
+
+
+    public function delete($id)
+    {
+        if (Auth::user()->role_id == '1' ) {
+
+        User::withTrashed()->find($id)->delete();
+            return response([
+                'message'    => 'The User was deleted',
+                ], 201);
+        }else{
+            return response([
+                'message'    => 'you do not have any permission !',
+                    ], 400);
+        }
+    }
+    public function restore($id)
+    {
+        if (Auth::user()->role_id == '1') {
+          
+            User::withTrashed()->find($id)->restore();
+            return response([
+                'message'    => 'The User was Restored',
+                ], 201);
+        }else{
+            return response([
+                'message'    => 'you do not have any permission for register new tag !',
+                    ], 400);
+        }
+    }  
 }

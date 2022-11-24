@@ -14,15 +14,15 @@ class Company extends Model
     use Uuids ,HasFactory, SoftDeletes;
 
     protected $guarded = [];
-    protected $casts = [
+    protected $casts   = [
       'has_activated' => 'boolean',
-  ];
+     ];
 
     public function users(): ?BelongsToMany
     {
-      return $this->belongsToMany(User::class);
-
+      return $this->belongsToMany(User::class)->withPivot('user_id');
     }
+    
     public function deposits(): ?HasMany
      {
         return $this->hasMany(Deposit::class);

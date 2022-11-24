@@ -27,6 +27,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('storeClient',         [UserController::class, 'storeClient']);
     Route::put('updateClient/{user}',  [UserController::class, 'updateClient']);
     Route::get('listUsers/{company}',  [UserController::class, 'listUsers']);
+    Route::delete('user/delete/{id}',  [UserController::class, 'delete']);
+    Route::put('user/restore/{id}',    [UserController::class, 'restore']);
+
     // depot controller
     Route::post('storeDeposit',          [DepositController::class, 'storeDeposit']);
     Route::get('listDeposits/{company}', [DepositController::class, 'listDeposits']);

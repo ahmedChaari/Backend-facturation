@@ -7,13 +7,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Uuids, HasFactory, HasApiTokens, Notifiable;
+    use Uuids, HasFactory, HasApiTokens, SoftDeletes, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -46,7 +47,7 @@ class User extends Authenticatable
 
     public function companies(): ?BelongsToMany
     {
-      return $this->belongsToMany(Company::class);
+      return $this->belongsToMany(Company::class)->withPivot('user_id');
      
     }
     public function role(): ?BelongsTo

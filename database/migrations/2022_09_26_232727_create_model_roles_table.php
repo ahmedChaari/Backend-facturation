@@ -16,8 +16,8 @@ class CreateModelRolesTable extends Migration
         Schema::create('model_roles', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('company_id');
-            $table->string('model');
-            $table->string('SousModel');
+            $table->foreignUuid('menu_id');
+            $table->foreignUuid('sous_menu_id')->nullable();
             $table->foreignUuid('role_id');
             $table->boolean('consulter');
             $table->boolean('ajouter');
@@ -31,7 +31,6 @@ class CreateModelRolesTable extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
