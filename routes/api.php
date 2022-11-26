@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\CompanyController;
 use App\Http\Controllers\API\DepositController;
+use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,4 +40,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('storeCompany',          [CompanyController::class, 'storeCompany']);
     Route::get('listCompanies',          [CompanyController::class, 'listCompanies']);
+
+
+    //product
+    Route::post('storeProduct',          [ProductController::class, 'storeProduct']);
+
 });

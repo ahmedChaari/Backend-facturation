@@ -19,12 +19,15 @@ class Company extends Model
      ];
 
     public function users(): ?BelongsToMany
-    {
+     {
       return $this->belongsToMany(User::class)->withPivot('user_id');
-    }
-    
+     }
     public function deposits(): ?HasMany
      {
         return $this->hasMany(Deposit::class);
+     }
+     public function products(): ?HasMany
+     {
+        return $this->hasMany(Product::class);
      }
 }

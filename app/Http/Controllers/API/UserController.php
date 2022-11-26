@@ -129,8 +129,7 @@ class UserController extends Controller
 
     public function storeClient(UserRequest $request)
     {
-      //  $company  = Auth::user()->company_id;
-
+        $company  = Auth::user()->company_id;
 
       if ( $request->has('path_image')) {
                //get the base-64 from data
@@ -153,7 +152,7 @@ class UserController extends Controller
                 'role_id'    => $request['role_id'],
                 'user_id'    => $userId,
                 'deposit_id' => $request['deposit_id'],
-                // 'company_id' => $company,
+                'company_id' => $company,
                 'password'   => bcrypt($request['password']),
             ]);
 

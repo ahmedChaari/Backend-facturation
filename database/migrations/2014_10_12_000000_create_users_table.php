@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-           // $table->foreignUuid('company_id')->nullable();
+            $table->foreignUuid('company_id')->nullable();
             $table->string('nom');
             $table->string('prenom');
             $table->string('path_image')->nullable();

@@ -61,8 +61,6 @@ class CompanyController extends Controller
     ]);
     $userArray = explode("," , $Userid);
     $company->users()->attach($userArray);
-
-  
    
     //dd($company);
     return response([

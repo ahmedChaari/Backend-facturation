@@ -17,6 +17,7 @@ class CreateDepositsTable extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('company_id');
             $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

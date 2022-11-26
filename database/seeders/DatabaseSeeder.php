@@ -21,9 +21,12 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             SousMenuSeeder::class,
             MenuSeeder::class,
-            CompanySeeder::class, 
+            CompanySeeder::class,
+            VendorSeeder::class,
+            CategorySeeder:: class,
             DepositSeeder::class, 
-            UserSeeder::class
+            UserSeeder::class,
+            ProdcutSeeder::class,
         ]);
     }
 }

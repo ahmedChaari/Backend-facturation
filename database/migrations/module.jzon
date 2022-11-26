@@ -176,3 +176,18 @@ DB::table('model_roles')->insert(
 
 
 
+
+    $roleCompany = Company::create([   
+        'company_id'  =>    $company,
+        'role_id'     =>   '1',
+        'menu_id'     =>   '1',
+        'sous_menu_id'=>   '1',
+        'consulter'   =>   '1',
+        'ajouter'     =>   '1',
+        'modifier'    =>   '1',
+        'valider'     =>   '1',
+        'supprimer'   =>   '1',
+        'imprimer'    =>   '1',
+        'exporter'    =>   '1',
+        'annuler'     =>   '1'
+    ]);

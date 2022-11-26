@@ -18,12 +18,13 @@ class CreateVendorsTable extends Migration
             $table->foreignUuid('company_id');
             $table->text('descreption');
             $table->string('RC');
-            $table->integer('tel');
-            $table->integer('fax')->nullable();
+            $table->string('tel');
+            $table->string('fax')->nullable();
             $table->string('ICE')->nullable();
             $table->string('ville');
             $table->string('email')->nullable();
             $table->text('adresse');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
