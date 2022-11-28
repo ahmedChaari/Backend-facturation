@@ -25,29 +25,31 @@ Route::post('/login',               [AuthController::class,  'login'])->name('lo
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('logout',              [AuthController::class, 'logout']);
+    
     //user controller
     Route::post('storeClient',         [UserController::class, 'storeClient']);
     Route::put('updateClient/{user}',  [UserController::class, 'updateClient']);
-    Route::get('listUsers/{company}',  [UserController::class, 'listUsers']);
+    Route::get('listUsers',            [UserController::class, 'listUsers']);
     Route::delete('user/delete/{id}',  [UserController::class, 'delete']);
     Route::put('user/restore/{id}',    [UserController::class, 'restore']);
-
+    
     // depot controller
     Route::post('storeDeposit',          [DepositController::class, 'storeDeposit']);
     Route::get('listDeposits',           [DepositController::class, 'listDeposits']);
     Route::put('updateDeposit/{deposit}',[DepositController::class, 'updateDeposit']);
     Route::delete('deleteDeposit/{id}',  [DepositController::class, 'deleteDeposit']);
     Route::put('restoreDeposit/{id}',    [DepositController::class, 'restoreDeposit']);
-    //company controller
 
+    //company controller
     Route::post('storeCompany',          [CompanyController::class, 'storeCompany']);
     Route::get('listCompanies',          [CompanyController::class, 'listCompanies']);
 
     //product
-    Route::post('storeProduct',         [ProductController::class, 'storeProduct']);
-    Route::get('listProduct',           [ProductController::class, 'listProduct']);
-    Route::delete('deleteProduct/{id}', [ProductController::class, 'deleteProduct']);
-    Route::put('restoreProduct/{id}',   [ProductController::class, 'restoreProduct']);
+    Route::post('storeProduct',          [ProductController::class, 'storeProduct']);
+    Route::get('listProduct',            [ProductController::class, 'listProduct']);
+    Route::delete('deleteProduct/{id}',  [ProductController::class, 'deleteProduct']);
+    Route::put('restoreProduct/{id}',    [ProductController::class, 'restoreProduct']);
+    Route::put('updateProduct/{product}',[ProductController::class, 'updateProduct']);
 
     //category
     Route::post('storeCategory',           [CategoryController::class, 'storeCategory']);

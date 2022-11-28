@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\CreateProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 use App\Http\Resources\Product\CreateProductResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Product;
@@ -80,9 +81,6 @@ class ProductController extends Controller
         return $products;
 
         }
-
-        
-
     }
 
     public function storeProduct(CreateProductRequest $request){
@@ -122,6 +120,65 @@ class ProductController extends Controller
     ]);
    
     //dd($product);
+    return response([
+      $product,
+      'message'    => 'create a new product !',
+      ], 200); 
+
+    }
+
+    public function updateProduct(UpdateProductRequest $request,Product $product){
+
+     
+        if ( $request->has('path_image')) {
+            //get the base-64 from data
+            
+            $image = $request->path_image;
+            $image = base64_decode($image);
+            
+            $safeName = Str::random(10).'.'.'png';
+            Storage::disk('public')->put('product/'.$safeName, $image);
+            $path = env('APP_URL').'/storage/product/'.$safeName;
+            $product->update([   
+                'path_image'      => $path,
+                'reference'       => $request->reference,
+                'vendor_id'       => $request->vendor_id,
+                'designation'     => $request->designation,
+                'prix_achat'      => $request->prix_achat,
+                'prix_vente'      => $request->prix_vente,
+                'category_id'     => $request->category_id,
+                'unite'           => $request->unite,
+                'code_bare'       => $request->code_bare,
+                'stock_min'       => $request->stock_min,
+                'TVA'             => $request->TVA,
+                'actif'           => $request->actif,
+                'rayon_a'         => $request->rayon_a,
+                'rayon_b'         => $request->rayon_b,
+                'deposit_id'      => $request->deposit_id,
+                'quantite_initial'=> $request->quantite_initial,
+                'description'     => $request->description,
+            ]);
+        }else {
+            $product->update([   
+                'reference'       => $request->reference,
+                'vendor_id'       => $request->vendor_id,
+                'designation'     => $request->designation,
+                'prix_achat'      => $request->prix_achat,
+                'prix_vente'      => $request->prix_vente,
+                'category_id'     => $request->category_id,
+                'unite'           => $request->unite,
+                'code_bare'       => $request->code_bare,
+                'stock_min'       => $request->stock_min,
+                'TVA'             => $request->TVA,
+                'actif'           => $request->actif,
+                'rayon_a'         => $request->rayon_a,
+                'rayon_b'         => $request->rayon_b,
+                'deposit_id'      => $request->deposit_id,
+                'quantite_initial'=> $request->quantite_initial,
+                'description'     => $request->description,
+            ]);
+        }
+        
     return response([
       $product,
       'message'    => 'create a new product !',

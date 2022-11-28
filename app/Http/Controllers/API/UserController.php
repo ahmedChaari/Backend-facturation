@@ -15,8 +15,9 @@ use Illuminate\Support\Str;
 class UserController extends Controller
 {
 
-  public function listUsers(Request $request,$company)
+  public function listUsers(Request $request)
   {
+    $company  = Auth::user()->company_id;
     $query    =  $request->get('search');
     $role     =  $request->get('role');
     $depot    =  $request->get('depot');
@@ -24,9 +25,7 @@ class UserController extends Controller
     // serch for all search name and role and depot
         if(isset($depot) && isset($query) && isset($role) ){
           $users = UserResource::collection(User::latest()
-          ->whereHas('companies', function ($query) use($company) {
-          $query->where('company_id', $company);
-            })
+          ->where('company_id', $company) 
             ->where( function($q) use ($query) {
               $q->where('nom', 'LIKE',"%{$query}%");
               $q->orWhere('prenom','LIKE', "%{$query}%");
@@ -42,9 +41,7 @@ class UserController extends Controller
          // serch for all search name  and depot
         }elseif(isset($depot) && isset($query)){
           $users = UserResource::collection(User::latest()
-          ->whereHas('companies', function ($query) use($company) {
-          $query->where('company_id', $company);
-            })
+          ->where('company_id', $company) 
             ->where( function($q) use ($query) {
               $q->where('nom', 'LIKE',"%{$query}%");
               $q->orWhere('prenom','LIKE', "%{$query}%");
@@ -57,9 +54,7 @@ class UserController extends Controller
          // serch for role and depot
         }elseif(isset($depot) && isset($role)){
           $users = UserResource::collection(User::latest()
-          ->whereHas('companies', function ($query) use($company) {
-          $query->where('company_id', $company);
-            })
+          ->where('company_id', $company) 
             ->whereHas('role', function ($query) use($role) {
               $query->where('name', $role);
           }) 
@@ -71,9 +66,7 @@ class UserController extends Controller
          // serch for search name and role
         }elseif(isset($query) && isset($role)){
           $users = UserResource::collection(User::latest()
-          ->whereHas('companies', function ($query) use($company) {
-          $query->where('company_id', $company);
-            })
+          ->where('company_id', $company) 
             ->where( function($q) use ($query) {
               $q->where('nom', 'LIKE',"%{$query}%");
               $q->orWhere('prenom','LIKE', "%{$query}%");
@@ -86,9 +79,7 @@ class UserController extends Controller
              // serch for search name 
         }elseif(isset($query)) {
           $users = UserResource::collection(User::latest()
-          ->whereHas('companies', function ($query) use($company) {
-              $query->where('company_id', $company);
-                 })
+            ->where('company_id', $company)    
           ->where( function($q) use ($query) {
               $q->where('nom', 'LIKE',"%{$query}%");
               $q->orWhere('prenom','LIKE', "%{$query}%");
@@ -99,9 +90,7 @@ class UserController extends Controller
          // serch for role 
         }elseif(isset($role) && !isset($query)){
           $users = UserResource::collection(User::latest()
-          ->whereHas('companies', function ($query) use($company) {
-          $query->where('company_id', $company);
-            })
+          ->where('company_id', $company) 
               ->whereHas('role', function ($query) use($role) {
                 $query->where('name', $role);
             }) 
@@ -109,9 +98,7 @@ class UserController extends Controller
              // serch for depot
         }elseif(isset($depot) && !isset($query) && !isset($role)){
           $users = UserResource::collection(User::latest()
-          ->whereHas('companies', function ($query) use($company) {
-          $query->where('company_id', $company);
-            })
+          ->where('company_id', $company) 
            ->whereHas('deposit', function ($query) use($depot) {
                 $query->where('name', $depot);
                 })
@@ -119,9 +106,7 @@ class UserController extends Controller
       // get all user for company
         }else{
           $users = UserResource::collection(User::latest()
-          ->whereHas('companies', function ($query) use($company) {
-          $query->where('company_id', $company);
-            })
+          ->where('company_id', $company) 
             ->paginate(10));
         return $users;
         }   
