@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Category extends Model
 {
     use Uuids ,HasFactory, SoftDeletes;
-
+    protected $guarded = [];
     public function products(): ?HasMany
      {
         return $this->hasMany(Product::class);

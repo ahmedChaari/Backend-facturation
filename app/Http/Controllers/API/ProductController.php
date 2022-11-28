@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\CreateProductRequest;
 use App\Http\Resources\Product\CreateProductResource;
+use App\Http\Resources\Product\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,11 +14,81 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function storeProduct(Request $request){
+
+
+    public function listProduct(Request $request)
+    {
 
         $company  = Auth::user()->company_id;
+        $query    =  $request->get('search');
+        $depot    =  $request->get('depot');
+        $category =  $request->get('category');
+        if(isset($query) && isset($depot) && isset($category)){
+            $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)
+            ->where( function($q) use ($query) {
+                $q->where('code_bare',    'LIKE', "%{$query}%");
+                $q->orWhere('reference',  'LIKE', "%{$query}%");
+                $q->orWhere('designation','LIKE', "%{$query}%");
+                $q->orWhere('description','LIKE', "%{$query}%");
+                $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
+                $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
+            })  
+            ->whereHas('category', function ($query) use($category) {
+            $query->where('name', $category);
+            }) 
+            ->whereHas('deposit', function ($query) use($depot) {
+            $query->where('name', $depot);
+            })
+            ->paginate(10));
+        return $products;
+        }
+        elseif(isset($query)){
+            $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)
+            ->where( function($q) use ($query) {
+                $q->where('code_bare',    'LIKE', "%{$query}%");
+                $q->orWhere('reference',  'LIKE', "%{$query}%");
+                $q->orWhere('designation','LIKE', "%{$query}%");
+                $q->orWhere('description','LIKE', "%{$query}%");
+                $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
+                $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
+            })  
+            ->paginate(10));
+        return $products;
+        }elseif(isset($depot)){
+            $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)
+            ->whereHas('deposit', function ($query) use($depot) {
+            $query->where('name', $depot);
+            })
+            ->paginate(10));
+        return $products;
+        }elseif(isset($category)){
+            $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)
+            ->whereHas('category', function ($query) use($category) {
+            $query->where('name', $category);
+            }) 
+            ->paginate(10));
+        return $products;
+        }
+        else{
+            $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company) 
+            ->paginate(10));
+        return $products;
 
-        $Userid = Auth::user()->id;
+        }
+
+        
+
+    }
+
+    public function storeProduct(CreateProductRequest $request){
+
+        $company  = Auth::user()->company_id;
+        $Userid   = Auth::user()->id;
         //get the base-64 from data  CreateCompanyReques
         $image = $request->image;
 
@@ -57,4 +128,27 @@ class ProductController extends Controller
       ], 200); 
 
     }
+     //delete Deposit
+     public function deleteProduct($id)
+     {
+           $product = Product::find($id);
+           if (isset($product)) {
+               $product = Product::find($id)->delete();
+               return response([
+                   'message'    => 'The Product was Deleted',
+                   ], 200);
+           }else{
+               return response([
+                   'message'    => 'The Product does\'n existing',
+                   ], 401);
+           }
+     }
+     public function restoreProduct($id)
+     {
+         Product::withTrashed()->find($id)->restore();
+         return response([
+             'message'    => 'The Deposit was Restored',
+             ], 401);
+     
+     }  
 }
