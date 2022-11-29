@@ -30,12 +30,13 @@ class RoleController extends Controller
         }
     }
      //create Role
-     public function storeCategory(RoleRequest $request){
+     public function storeRole(RoleRequest $request){
 
-        $company  = Auth::user()->company_id;
+        $descreption =  ucfirst(mb_substr($request['name'], 0, 1));
+        $company      = Auth::user()->company_id;
         $role         = Role::create([
             'name'        => $request['name'],
-            'descreption' => $request['descreption'],
+            'descreption' => $descreption,
             'company_id'  => $company, 
         ]);
         return response([
@@ -45,11 +46,10 @@ class RoleController extends Controller
     }
 
      //update Role
-     public function updateCategory(RoleRequest $request,Role $role){
+     public function updateRole(RoleRequest $request,Role $role){
 
         $role->update([   
           'name'        => $request['name'],
-          'descreption' => $request['descreption'],
         ]); 
       return response([
         $role,
