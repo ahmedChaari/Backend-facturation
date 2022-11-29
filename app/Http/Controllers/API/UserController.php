@@ -25,7 +25,7 @@ class UserController extends Controller
     // serch for all search name and role and depot
         if(isset($depot) && isset($query) && isset($role) ){
           $users = UserResource::collection(User::latest()
-          ->where('company_id', $company) 
+            ->where('company_id', $company) 
             ->where( function($q) use ($query) {
               $q->where('nom', 'LIKE',"%{$query}%");
               $q->orWhere('prenom','LIKE', "%{$query}%");
@@ -41,7 +41,7 @@ class UserController extends Controller
          // serch for all search name  and depot
         }elseif(isset($depot) && isset($query)){
           $users = UserResource::collection(User::latest()
-          ->where('company_id', $company) 
+            ->where('company_id', $company) 
             ->where( function($q) use ($query) {
               $q->where('nom', 'LIKE',"%{$query}%");
               $q->orWhere('prenom','LIKE', "%{$query}%");
@@ -189,7 +189,6 @@ class UserController extends Controller
   ]);
   }
     return response([
-     
       new  UserResource($user),
       'message'    => 'update a client of company !',
       ], 200); 

@@ -129,7 +129,6 @@ class ProductController extends Controller
 
     public function updateProduct(UpdateProductRequest $request,Product $product){
 
-     
         if ( $request->has('path_image')) {
             //get the base-64 from data
             
@@ -178,7 +177,7 @@ class ProductController extends Controller
                 'description'     => $request->description,
             ]);
         }
-        
+
     return response([
       $product,
       'message'    => 'create a new product !',
