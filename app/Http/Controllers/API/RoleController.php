@@ -48,8 +48,10 @@ class RoleController extends Controller
      //update Role
      public function updateRole(RoleRequest $request,Role $role){
 
+        $descreption =  ucfirst(mb_substr($request['name'], 0, 1));
         $role->update([   
           'name'        => $request['name'],
+          'descreption' => $descreption,
         ]); 
       return response([
         $role,
