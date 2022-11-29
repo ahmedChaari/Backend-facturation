@@ -5,6 +5,7 @@ use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\CompanyController;
 use App\Http\Controllers\API\DepositController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -57,5 +58,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('listCategories',           [CategoryController::class, 'listCategories']);
     Route::delete('deleteCategory/{id}',   [CategoryController::class, 'deleteCategory']);
     Route::put('restoreCategory/{id}',     [CategoryController::class, 'restoreCategory']);
+
+    //role
+    Route::post('storeRole',           [RoleController::class, 'storeRole']);
+    Route::put('updateRole/{role}',    [RoleController::class, 'updateRole']);
+    Route::get('listRoles',            [RoleController::class, 'listRoles']);
+    Route::delete('deleteRole/{id}',   [RoleController::class, 'deleteRole']);
+    Route::put('restoreRole/{id}',     [RoleController::class, 'restoreRole']);
     
 });

@@ -4,12 +4,31 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Role\RoleRequest;
+use App\Http\Resources\Role\RoleResource;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
+    public function listRoles(Request $request){
+        $query    =  $request->get('search');
+        $company  = Auth::user()->company_id;
+        if (isset($query)) {
+            $roles = RoleResource::collection(Role::latest()
+                ->where('name', $company)
+                ->where( function($q) use ($query) {
+                    $q->where('name', 'LIKE',"%{$query}%");
+                    })  
+                ->paginate(10));
+            return $roles;
+        }else{
+            $roles = RoleResource::collection(Role::latest()
+                ->where('company_id', $company) 
+                ->paginate(10));
+            return $roles;
+        }
+    }
      //create Role
      public function storeCategory(RoleRequest $request){
 
@@ -53,7 +72,7 @@ class RoleController extends Controller
                   ], 401);
           }
     }
-    
+
     //restore the role
     public function restoreRole($id)
     {

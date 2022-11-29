@@ -30,4 +30,8 @@ class Company extends Model
      {
         return $this->hasMany(Product::class);
      }
+     public function roles(): ?HasMany
+     {
+        return $this->hasMany(Role::class);
+     }
 }

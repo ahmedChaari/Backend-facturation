@@ -17,6 +17,7 @@ class CreateRolesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('descreption');
+            $table->foreignUuid('company_id');
            // $table->string('role_type');
            // $table->enum('role_type',['SA','AD','CO','EQ','CL']); // SUPER ADMIN or ADMIN or comptable or equipier or client
             $table->softDeletes();
