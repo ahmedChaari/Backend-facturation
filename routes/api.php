@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\Auth\NewPasswordController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\CompanyController;
 use App\Http\Controllers\API\DepositController;
@@ -11,12 +12,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
+
+
+
     /*************************************
      *          Public routes            *
      *                                   *
      *************************************/
 
 Route::post('/login',               [AuthController::class,  'login'])->name('login.admin');
+Route::post('forgotPassword',       [NewPasswordController::class, 'forgotPassword']);
+Route::post('resetPassword',        [NewPasswordController::class, 'resetPassword'])->name('password.reset');
+
 
     /*************************************
      *      Protected routes Auth        *
