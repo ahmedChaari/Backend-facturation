@@ -5,6 +5,7 @@ use App\Http\Controllers\API\Auth\NewPasswordController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\CompanyController;
 use App\Http\Controllers\API\DepositController;
+use App\Http\Controllers\API\ParametreController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\UserController;
@@ -72,5 +73,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('listRoles',            [RoleController::class, 'listRoles']);
     Route::delete('deleteRole/{id}',   [RoleController::class, 'deleteRole']);
     Route::put('restoreRole/{id}',     [RoleController::class, 'restoreRole']);
-    
+
+    //parametrage
+     Route::get('listCountries',       [ParametreController::class, 'listCountries']);
+     Route::get('listCities',          [ParametreController::class, 'listCities']);
 });
