@@ -16,41 +16,40 @@ class ParametreController extends Controller
         $query    =  $request->get('search');
        
         if (isset($query)) {
-            $countries = CountiesResource::collection(Country::latest()
-                ->where( function($q) use ($query) {
+            $countries = CountiesResource::collection(Country::
+                where( function($q) use ($query) {
                     $q->where('name', 'LIKE',"%{$query}%");
                     $q->where('capital', 'LIKE',"%{$query}%");
                     })
-                    ->orderBy('name', 'ASC')
-                ->paginate(10));
+                    ->orderBy('name', 'asc')
+                    ->paginate(10));
             return $countries;
         }else{
-            $countries = CountiesResource::collection(Country::latest()
-                ->orderBy('name', 'ASC')
-                ->get(10));
+            $countries = CountiesResource::collection(Country::
+                orderBy('name', 'asc')
+                ->paginate(10));
             return $countries;
         }
     }
 
     //list of city
     public function listCities(Request $request){
+
         $query    =  $request->get('search');
-       
         if (isset($query)) {
-            $countries = CitiesResource::collection(City::latest()
-                ->where('country_id','=' ,'149')
+            $cities = CitiesResource::collection(City::where('country_id','=' ,'149')
                 ->where( function($q) use ($query) {
                     $q->where('name', 'LIKE',"%{$query}%");
                 })
-                ->orderBy('name', 'ASC')  
+                ->orderBy('name', 'asc')  
                 ->paginate(10));
-            return $countries;
+                return  $cities ;
         }else{
-            $countries = CitiesResource::collection(City::latest()
-                ->where('country_id','=' ,'149')
-                ->orderBy('name', 'ASC')
+            $cities = CitiesResource::collection(City::where('country_id','=' ,'149')
+                ->orderBy('name', 'asc')
                 ->paginate(10));
-            return $countries;
+                return  $cities ;
         }
+         
     }
 }
