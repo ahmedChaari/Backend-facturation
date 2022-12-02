@@ -34,4 +34,8 @@ class Company extends Model
      {
         return $this->hasMany(Role::class);
      }
+     public function categories(): ?HasMany
+     {
+        return $this->hasMany(Category::class);
+     }
 }

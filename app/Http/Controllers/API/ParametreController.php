@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class ParametreController extends Controller
 {
+    // list of country
     public function listCountries(Request $request){
         $query    =  $request->get('search');
        
@@ -19,15 +20,19 @@ class ParametreController extends Controller
                 ->where( function($q) use ($query) {
                     $q->where('name', 'LIKE',"%{$query}%");
                     $q->where('capital', 'LIKE',"%{$query}%");
-                    })  
+                    })
+                    ->orderBy('name', 'DESC')
                 ->paginate(10));
             return $countries;
         }else{
             $countries = CountiesResource::collection(Country::latest()
+                ->orderBy('name', 'DESC')
                 ->get(10));
             return $countries;
         }
     }
+
+    //list of city
     public function listCities(Request $request){
         $query    =  $request->get('search');
        
@@ -36,12 +41,14 @@ class ParametreController extends Controller
                 ->where('country_id','=' ,'149')
                 ->where( function($q) use ($query) {
                     $q->where('name', 'LIKE',"%{$query}%");
-                })  
+                })
+                ->orderBy('name', 'DESC')  
                 ->paginate(10));
             return $countries;
         }else{
             $countries = CitiesResource::collection(City::latest()
                 ->where('country_id','=' ,'149')
+                ->orderBy('name', 'DESC')
                 ->paginate(10));
             return $countries;
         }

@@ -12,7 +12,7 @@ class City extends Model
     use HasFactory ;
 
     protected $guarded = [];
-   // protected $table = ['cites'];
+   // protected $table = ['cities'];
 
 
     public function country(): ?BelongsTo
