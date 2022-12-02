@@ -21,12 +21,12 @@ class ParametreController extends Controller
                     $q->where('name', 'LIKE',"%{$query}%");
                     $q->where('capital', 'LIKE',"%{$query}%");
                     })
-                    ->orderBy('name', 'DESC')
+                    ->orderBy('name', 'ASC')
                 ->paginate(10));
             return $countries;
         }else{
             $countries = CountiesResource::collection(Country::latest()
-                ->orderBy('name', 'DESC')
+                ->orderBy('name', 'ASC')
                 ->get(10));
             return $countries;
         }
@@ -42,13 +42,13 @@ class ParametreController extends Controller
                 ->where( function($q) use ($query) {
                     $q->where('name', 'LIKE',"%{$query}%");
                 })
-                ->orderBy('name', 'DESC')  
+                ->orderBy('name', 'ASC')  
                 ->paginate(10));
             return $countries;
         }else{
             $countries = CitiesResource::collection(City::latest()
                 ->where('country_id','=' ,'149')
-                ->orderBy('name', 'DESC')
+                ->orderBy('name', 'ASC')
                 ->paginate(10));
             return $countries;
         }
