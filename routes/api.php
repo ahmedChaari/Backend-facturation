@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AgenceController;
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Auth\NewPasswordController;
 use App\Http\Controllers\API\CategoryController;
@@ -77,4 +78,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //parametrage
      Route::get('listCountries',       [ParametreController::class, 'listCountries']);
      Route::get('listCities',          [ParametreController::class, 'listCities']);
+
+     //agences 
+   
+        Route::get('listAgences',      [AgenceController::class, 'listAgences']);
+
 });
