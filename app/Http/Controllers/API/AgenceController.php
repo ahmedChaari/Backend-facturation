@@ -27,19 +27,38 @@ class AgenceController extends Controller
                 ->where('company_id', $company) 
                 ->orWhere('company_id', null) 
                 ->get());
-            return $agences;
+                return response([
+                    $agences,
+                    'message'    => 'list of agence !',
+                    ], 200);
         }
     }
     // create agence
     public function storeAgence(Request $request){
         $company  = Auth::user()->company_id;
+        $libelle =  ucfirst(mb_substr($request['name'], 0, 1));
         $category         = Agence::create([
             'name'        => $request['name'],
+            'libelle'     => $libelle,
             'company_id'  => $company, 
         ]);
         return response([
             $category,
-            'message'    => 'create a new category of company !',
+            'message'    => 'create a new agence of company !',
             ], 200); 
     }
+
+    //delete agence
+    public function deleteAgence($id)
+    {
+          $company  = Auth::user()->company_id;
+          $category = Agence::where('id', $id)
+                     ->where('company_id',  $company);
+          if (isset($category)) {
+              echo 'deleted';
+          }else{
+              echo 'not deleted';
+          }
+    }
+
 }

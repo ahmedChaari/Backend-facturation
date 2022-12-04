@@ -80,7 +80,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
      Route::get('listCities',          [ParametreController::class, 'listCities']);
 
      //agences 
-   
-        Route::get('listAgences',      [AgenceController::class, 'listAgences']);
-
+    Route::post('storeAgence',         [AgenceController::class, 'storeAgence']);
+    Route::get('listAgences',          [AgenceController::class, 'listAgences']);
+    Route::delete('deleteAgence/{id}', [AgenceController::class, 'deleteAgence']);
 });
