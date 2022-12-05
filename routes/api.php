@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AgenceController;
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Auth\NewPasswordController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\ClientTypeController;
 use App\Http\Controllers\API\CompanyController;
 use App\Http\Controllers\API\DepositController;
 use App\Http\Controllers\API\ParametreController;
@@ -83,4 +84,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('storeAgence',         [AgenceController::class, 'storeAgence']);
     Route::get('listAgences',          [AgenceController::class, 'listAgences']);
     Route::delete('deleteAgence/{id}', [AgenceController::class, 'deleteAgence']);
+    Route::put('updateAgence/{agence}',[AgenceController::class, 'updateAgence']);
+
+    //client type 
+    Route::get('listClientTypes',      [ClientTypeController::class, 'listClientTypes']);
+    Route::post('storeClientType',     [ClientTypeController::class, 'storeClientType']);
+    Route::put('updateClientType/{clientType}',[ClientTypeController::class, 'updateClientType']);
 });

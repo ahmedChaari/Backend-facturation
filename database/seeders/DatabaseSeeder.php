@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder:: class,
             DepositSeeder::class, 
             RoleSeeder::class,
+            ClientTypeSeeder::class,
             UserSeeder::class,
             ProdcutSeeder::class,
         ]);

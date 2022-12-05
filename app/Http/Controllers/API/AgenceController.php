@@ -21,24 +21,34 @@ class AgenceController extends Controller
                     $q->where('name', 'LIKE',"%{$query}%");
                     })  
                 ->get());
-            return $agences;
+            return response([
+                $agences,
+                'message'    => 'list of agence !',
+                ], 200);
         }else{
             $agences = AgenceResource::collection(Agence::latest()
                 ->where('company_id', $company) 
                 ->orWhere('company_id', null) 
                 ->get());
-                return response([
-                    $agences,
-                    'message'    => 'list of agence !',
-                    ], 200);
+            return response([
+                $agences,
+                'message'    => 'list of agence !',
+                ], 200);
         }
      }
-     function getlibelle($value){               
-                $name =  ucfirst(mb_substr($value, 0, 1));
-                $pieces = explode(" ", $value);
-                $name2 =  ucfirst(mb_substr($pieces[1], 0, 1));
-                return   $name.$name2 ;
-        }
+    function getlibelle($value){               
+        $count = str_word_count($value);
+        if($count < 2){
+             $name =  ucfirst(mb_substr($value, 0, 1));
+             return $name;
+        }else{
+            $name =  ucfirst(mb_substr($value, 0, 1));
+            $pieces = explode(" ", $value);
+        // echo $pieces[1]; // piece1
+            $name2 =  ucfirst(mb_substr($pieces[1], 0, 1));
+            return   $name.$name2 ;
+        }             
+    }
     // create agence
     public function storeAgence(Request $request){
         $company  = Auth::user()->company_id;
@@ -52,6 +62,20 @@ class AgenceController extends Controller
             $category,
             'message'    => 'create a new agence of company !',
             ], 200); 
+    }
+
+    //update agence of company
+
+    public function updateAgence(Request $request,Agence $agence){
+        $value    = $request['name'];
+        $agence->update([   
+            'name'        => $value,
+            'libelle'     => $this->getlibelle($value),
+          ]); 
+        return response([
+          $agence,
+          'message'    => 'update a agence of company !',
+          ], 200); 
     }
 
     //delete agence
