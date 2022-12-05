@@ -32,14 +32,20 @@ class AgenceController extends Controller
                     'message'    => 'list of agence !',
                     ], 200);
         }
-    }
+     }
+     function getlibelle($value){               
+                $name =  ucfirst(mb_substr($value, 0, 1));
+                $pieces = explode(" ", $value);
+                $name2 =  ucfirst(mb_substr($pieces[1], 0, 1));
+                return   $name.$name2 ;
+        }
     // create agence
     public function storeAgence(Request $request){
         $company  = Auth::user()->company_id;
-        $libelle =  ucfirst(mb_substr($request['name'], 0, 1));
+        $value    = $request['name'];
         $category         = Agence::create([
-            'name'        => $request['name'],
-            'libelle'     => $libelle,
+            'name'        => $value,
+            'libelle'     => $this->getlibelle($value),
             'company_id'  => $company, 
         ]);
         return response([

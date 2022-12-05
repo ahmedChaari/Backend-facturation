@@ -29,14 +29,21 @@ class RoleController extends Controller
             return $roles;
         }
     }
+    // get name 
+    function getlibelle($value){               
+        $name =  ucfirst(mb_substr($value, 0, 1));
+        $pieces = explode(" ", $value);
+        $name2 =  ucfirst(mb_substr($pieces[1], 0, 1));
+        return   $name.$name2 ;
+    }
      //create Role
      public function storeRole(RoleRequest $request){
 
-        $descreption =  ucfirst(mb_substr($request['name'], 0, 1));
+        $value    = $request['name'];
         $company      = Auth::user()->company_id;
         $role         = Role::create([
             'name'        => $request['name'],
-            'descreption' => $descreption,
+            'descreption' => $this->getlibelle($value),
             'company_id'  => $company, 
         ]);
         return response([
@@ -48,10 +55,10 @@ class RoleController extends Controller
      //update Role
      public function updateRole(RoleRequest $request,Role $role){
 
-        $descreption =  ucfirst(mb_substr($request['name'], 0, 1));
+        $value    = $request['name'];
         $role->update([   
           'name'        => $request['name'],
-          'descreption' => $descreption,
+          'descreption' => $this->getlibelle($value),
         ]); 
       return response([
         $role,
