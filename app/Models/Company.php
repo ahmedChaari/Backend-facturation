@@ -38,8 +38,12 @@ class Company extends Model
      {
         return $this->hasMany(Category::class);
      }
-     public function ClientTypes(): ?HasMany
+     public function clientTypes(): ?HasMany
      {
         return $this->hasMany(ClientType::class);
+     }
+     public function unities(): ?HasMany
+     {
+        return $this->hasMany(Unity::class);
      }
 }

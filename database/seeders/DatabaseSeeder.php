@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             DepositSeeder::class, 
             RoleSeeder::class,
             ClientTypeSeeder::class,
+            UnitySeeder::class,
             UserSeeder::class,
             ProdcutSeeder::class,
         ]);

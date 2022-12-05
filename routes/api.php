@@ -10,6 +10,7 @@ use App\Http\Controllers\API\DepositController;
 use App\Http\Controllers\API\ParametreController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\RoleController;
+use App\Http\Controllers\API\UnityController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -90,4 +91,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('listClientTypes',      [ClientTypeController::class, 'listClientTypes']);
     Route::post('storeClientType',     [ClientTypeController::class, 'storeClientType']);
     Route::put('updateClientType/{clientType}',[ClientTypeController::class, 'updateClientType']);
+
+     //unity 
+     Route::get('listUnities',        [UnityController::class, 'listUnities']);
+     Route::post('storeUnity',        [UnityController::class, 'storeUnity']);
+     Route::put('updateUnity/{unity}',[UnityController::class, 'updateUnity']);
 });
