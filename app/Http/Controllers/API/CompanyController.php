@@ -7,6 +7,7 @@ use App\Http\Requests\Company\CreateCompanyReques;
 use App\Http\Resources\Company\CompanyResource;
 use App\Models\Company;
 use App\Models\CompanyUser;
+use App\Models\ModelRole;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,8 +60,12 @@ class CompanyController extends Controller
           'web'              => $request['web'],
           'logo'             => $path,
     ]);
+
+     
+    $instance  =  new Company();
+    $instance->storeRoleCompany($company->id);
+
     
-    Company::storeRoleCompany($company);
     //$userArray = explode("," , $Userid);
     //$company->users()->attach($userArray);
    

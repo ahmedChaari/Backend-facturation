@@ -15,7 +15,7 @@ class ModelRoleSeeder extends Seeder
      */
     public function run()
     {
-        {
+        $company = Company::all()->random()->id;
             //create menu with role id
             $i = 5 ;
             $n = 10 ;
@@ -23,7 +23,7 @@ class ModelRoleSeeder extends Seeder
             for ($n = 1; $n < 11; $n++){
                 for ($i = 1; $i <= 5; $i++) {  
                     ModelRole::create([
-                        //'company_id'     => '',
+                        'company_id'     =>  $company,
                         'menu_id'        => $n,
                         //'sous_menu_id'   => 1,
                         'role_id'        => $i,
@@ -38,13 +38,13 @@ class ModelRoleSeeder extends Seeder
                     ]);
                 }
             };
-            
+
  //create sous menu with role id
 
             for ($y = 1; $y < 48; $y++){
                 for ($i = 1; $i <= 5; $i++) {  
                         ModelRole::create([
-                            //'company_id'     => '',
+                            'company_id'     =>  $company,
                             //'menu_id'        => $n,
                             'sous_menu_id'   => $y,
                             'role_id'        => $i,
@@ -61,4 +61,3 @@ class ModelRoleSeeder extends Seeder
             }
         }
     }
-}

@@ -15,7 +15,7 @@ class CreateModelRolesTable extends Migration
     {
         Schema::create('model_roles', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('company_id')->nullable()->constrained();
+            $table->foreignUuid('company_id','50')->nullable();
             $table->foreignId('menu_id')->nullable();
             $table->foreignId('sous_menu_id')->nullable();
             $table->foreignId('role_id');
