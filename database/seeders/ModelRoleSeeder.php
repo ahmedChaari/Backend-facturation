@@ -16,254 +16,49 @@ class ModelRoleSeeder extends Seeder
     public function run()
     {
         {
-            ModelRole::create([
-                'name'           => 'table de reference',
-                'model'          => 'parametrage',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
+            //create menu with role id
+            $i = 5 ;
+            $n = 10 ;
+            $y = 47 ;
+            for ($n = 1; $n < 11; $n++){
+                for ($i = 1; $i <= 5; $i++) {  
                     ModelRole::create([
-                'name'           =>   'gestion des profiles',
-                'model'          =>   'parametrage',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
+                        //'company_id'     => '',
+                        'menu_id'        => $n,
+                        //'sous_menu_id'   => 1,
+                        'role_id'        => $i,
+                        'consulter'      => '1',
+                        'ajouter'        => '1',
+                        'modifier'       => '1',
+                        'valider'        => '1',
+                        'supprimer'      => '1',
+                        'imprimer'       => '1',
+                        'exporter'       => '1',
+                        'annuler'        => '1',
                     ]);
-                    ModelRole::create([
-                'name'      =>   'parametrage general',
-                'model'     =>   'parametrage',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
-                    ModelRole::create([
-                'name'      =>   'modele pdf',
-                'model'     =>   'parametrage',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
-                    ModelRole::create([
-                'name'      =>   'sessions',
-                'model'     =>   'parametrage',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
-    
-                    ModelRole::create([
-                'name'      =>   'list des produit',
-                'model'     =>   'stock',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
-                    ModelRole::create([
-                'name'              =>   'list des depots',
-                'model'     =>   'stock',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
-                    ModelRole::create([
-                'name'              =>   'bon entree',
-                'model'     =>   'stock',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
-                    ModelRole::create([
-                'name'              =>   'bon des sortie',
-                'model'     =>   'stock',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
-                    ModelRole::create([
-                'name'           =>   'bon de transfert',
-                'model'          =>   'stock',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
-                    ModelRole::create([
-                'name'              =>   'histoire des mouvements',
-                'model'     =>   'stock',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
-                    ModelRole::create([
-                'name'              =>   'mon stock',
-                'model'     =>   'stock',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
-                    ModelRole::create([
-                'name'           =>  'inventaire',
-                'model'          => 'stock',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
-                    ModelRole::create([
-                'name'           =>   'produit a commander',
-                'model'          =>   'stock',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
-            ModelRole::create([
-                'name'           =>   'list des fournisseurs',
-                'model'          =>   'achat',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-            ]);
-            ModelRole::create([
-                'name'           =>   'demande de prix',
-                'model'          =>   'achat',
-                'role_id'        => '1',
-                'consulter'      => '1',
-                'ajouter'        => '1',
-                'modifier'       => '1',
-                'valider'        => '1',
-                'supprimer'      => '1',
-                'imprimer'       => '1',
-                'exporter'       => '1',
-                'annuler'        => '1',
-                    ]);
-                ModelRole::create([
-                    'name'           =>   'bon de commande',
-                    'model'          =>   'achat',
-                    'role_id'        => '1',
-                    'consulter'      => '1',
-                    'ajouter'        => '1',
-                    'modifier'       => '1',
-                    'valider'        => '1',
-                    'supprimer'      => '1',
-                    'imprimer'       => '1',
-                    'exporter'       => '1',
-                    'annuler'        => '1',
+                }
+            };
+            
+ //create sous menu with role id
+
+            for ($y = 1; $y < 48; $y++){
+                for ($i = 1; $i <= 5; $i++) {  
+                        ModelRole::create([
+                            //'company_id'     => '',
+                            //'menu_id'        => $n,
+                            'sous_menu_id'   => $y,
+                            'role_id'        => $i,
+                            'consulter'      => '1',
+                            'ajouter'        => '1',
+                            'modifier'       => '1',
+                            'valider'        => '1',
+                            'supprimer'      => '1',
+                            'imprimer'       => '1',
+                            'exporter'       => '1',
+                            'annuler'        => '1',
                         ]);
-                ModelRole::create([
-                    'name'           =>   'bon de reception',
-                    'model'          =>   'achat',
-                    'role_id'        => '1',
-                    'consulter'      => '1',
-                    'ajouter'        => '1',
-                    'modifier'       => '1',
-                    'valider'        => '1',
-                    'supprimer'      => '1',
-                    'imprimer'       => '1',
-                    'exporter'       => '1',
-                    'annuler'        => '1',
-                        ]);
-                ModelRole::create([
-                    'name'           =>   'facture d\'achat',
-                    'model'          =>   'achat',
-                    'role_id'        => '1',
-                    'consulter'      => '1',
-                    'ajouter'        => '1',
-                    'modifier'       => '1',
-                    'valider'        => '1',
-                    'supprimer'      => '1',
-                    'imprimer'       => '1',
-                    'exporter'       => '1',
-                    'annuler'        => '1',
-                        ]);            
+                    }
+            }
         }
     }
 }

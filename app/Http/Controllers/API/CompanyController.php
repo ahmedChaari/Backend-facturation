@@ -29,7 +29,7 @@ class CompanyController extends Controller
 
     public function storeCompany(CreateCompanyReques $request){
 
-        $Userid = Auth::user()->id;
+       // $Userid = Auth::user()->id;
         //get the base-64 from data  CreateCompanyReques
         $image = $request->logo;
 
@@ -59,8 +59,10 @@ class CompanyController extends Controller
           'web'              => $request['web'],
           'logo'             => $path,
     ]);
-    $userArray = explode("," , $Userid);
-    $company->users()->attach($userArray);
+    
+    Company::storeRoleCompany($company);
+    //$userArray = explode("," , $Userid);
+    //$company->users()->attach($userArray);
    
     //dd($company);
     return response([

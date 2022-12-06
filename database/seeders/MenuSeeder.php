@@ -15,14 +15,17 @@ class MenuSeeder extends Seeder
     public function run()
     {
         Menu::create([
+            'name'           => 'accueil',
+        ]);
+        Menu::create([
             'name'           => 'parametrage',
         ]);
-        Menu::create([
-            'name'           => 'entreprise',
-        ]);
-        Menu::create([
-            'name'           => 'utilisateur',
-        ]);
+       // Menu::create([
+        //    'name'           => 'entreprise',
+      //  ]);
+      //  Menu::create([
+     //       'name'           => 'utilisateur',
+      //  ]);
         Menu::create([
             'name'           => 'stock',
         ]);
@@ -30,7 +33,7 @@ class MenuSeeder extends Seeder
             'name'           => 'achat',
         ]);
         Menu::create([
-            'name'           => 'vent',
+            'name'           => 'vente',
         ]);
         Menu::create([
             'name'           => 'tresorerie',
@@ -39,11 +42,15 @@ class MenuSeeder extends Seeder
             'name'           => 'statistique',
         ]);
         Menu::create([
+            'name'           => 'caisse',
+        ]);
+        Menu::create([
             'name'           => 'depence',
         ]);
         Menu::create([
             'name'           => 'credit',
         ]);
+        
        
         
     }

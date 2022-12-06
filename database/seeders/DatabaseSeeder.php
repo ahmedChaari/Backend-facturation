@@ -19,13 +19,14 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call([
             AgenceSeeder::class,
-            SousMenuSeeder::class,
             MenuSeeder::class,
+            SousMenuSeeder::class,
             CompanySeeder::class,
             VendorSeeder::class,
             CategorySeeder:: class,
             DepositSeeder::class, 
             RoleSeeder::class,
+            ModelRoleSeeder::class,
             ClientTypeSeeder::class,
             UnitySeeder::class,
             UserSeeder::class,

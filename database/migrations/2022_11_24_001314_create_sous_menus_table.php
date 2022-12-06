@@ -16,10 +16,10 @@ class CreateSousMenusTable extends Migration
         Schema::create('sous_menus', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('menu_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
