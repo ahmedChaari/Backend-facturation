@@ -46,6 +46,8 @@ class Company extends Model
      {
         return $this->hasMany(Unity::class);
      }
+
+     
      public function modelRoles(): ?HasMany
      {
         return $this->hasMany(ModelRole::class);
@@ -62,14 +64,14 @@ public function storeRoleCompany($company){
                   'menu_id'        => $n,
                   //'sous_menu_id'   => 1,
                   'role_id'        => $i,
-                  'consulter'      => '1',
-                  'ajouter'        => '1',
-                  'modifier'       => '1',
-                  'valider'        => '1',
-                  'supprimer'      => '1',
-                  'imprimer'       => '1',
-                  'exporter'       => '1',
-                  'annuler'        => '1',
+                  'consulter'      => 1,
+                  'ajouter'        => 1,
+                  'modifier'       => 1,
+                  'valider'        => 1,
+                  'supprimer'      => 1,
+                  'imprimer'       => 1,
+                  'exporter'       => 1,
+                  'annuler'        => 1,
               ]);
           }
       };    
@@ -81,14 +83,14 @@ public function storeRoleCompany($company){
                       //'menu_id'        => $n,
                       'sous_menu_id'   => $y,
                       'role_id'        => $i,
-                      'consulter'      => '1',
-                      'ajouter'        => '1',
-                      'modifier'       => '1',
-                      'valider'        => '1',
-                      'supprimer'      => '1',
-                      'imprimer'       => '1',
-                      'exporter'       => '1',
-                      'annuler'        => '1',
+                      'consulter'      => 1,
+                      'ajouter'        => 1,
+                      'modifier'       => 1,
+                      'valider'        => 1,
+                      'supprimer'      => 1,
+                      'imprimer'       => 1,
+                      'exporter'       => 1,
+                      'annuler'        => 1,
                   ]);
               }
       }

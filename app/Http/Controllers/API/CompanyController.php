@@ -17,10 +17,7 @@ use Illuminate\Support\Str;
 class CompanyController extends Controller
 {
   public function listCompanies(){
-
-    
     $userId  = Auth::user()->id;
-
     $company = User::latest()
     ->wherePivot('user_id', '=',  $userId)
            

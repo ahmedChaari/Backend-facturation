@@ -7,6 +7,7 @@ use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ClientTypeController;
 use App\Http\Controllers\API\CompanyController;
 use App\Http\Controllers\API\DepositController;
+use App\Http\Controllers\API\ModelRoleController;
 use App\Http\Controllers\API\ParametreController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\RoleController;
@@ -93,7 +94,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('updateClientType/{clientType}',[ClientTypeController::class, 'updateClientType']);
 
      //unity 
-     Route::get('listUnities',        [UnityController::class, 'listUnities']);
-     Route::post('storeUnity',        [UnityController::class, 'storeUnity']);
-     Route::put('updateUnity/{unity}',[UnityController::class, 'updateUnity']);
+    Route::get('listUnities',        [UnityController::class, 'listUnities']);
+    Route::post('storeUnity',        [UnityController::class, 'storeUnity']);
+    Route::put('updateUnity/{unity}',[UnityController::class, 'updateUnity']);
+
+     //mode Role
+     Route::get('listModelRole',     [ModelRoleController::class, 'listModelRole']);
 });

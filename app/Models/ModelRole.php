@@ -14,7 +14,7 @@ class ModelRole extends Model
     use Uuids, HasFactory, SoftDeletes;
 
     protected $guarded = [];
-    
+
     public function company(): ?BelongsTo
     {
         return $this->belongsTo(Company::class);
@@ -26,5 +26,9 @@ class ModelRole extends Model
     public function sousMenu(): ?BelongsTo
     {
         return $this->belongsTo(SousMenu::class);
+    }
+    public function role(): ?BelongsTo
+    {
+        return $this->belongsTo(Role::class);
     }
 }

@@ -17,6 +17,7 @@ class CreateSousMenusTable extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('menu_id')->nullable()->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

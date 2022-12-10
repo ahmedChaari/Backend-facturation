@@ -12,6 +12,8 @@ class SousMenu extends Model
 {
     use  HasFactory, SoftDeletes;
 
+    protected $guarded = [];
+
     public function modelRoles(): ?HasMany
     {
        return $this->hasMany(ModelRole::class);

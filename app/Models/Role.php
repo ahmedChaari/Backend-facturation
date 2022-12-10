@@ -24,4 +24,9 @@ class Role extends Model
      {
          return $this->belongsTo(Company::class);
      }
+
+     public function modelRoles(): ?HasMany
+    {
+       return $this->hasMany(ModelRole::class);
+    }
 }
