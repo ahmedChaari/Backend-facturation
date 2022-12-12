@@ -18,5 +18,9 @@ class Menu extends Model
     {
        return $this->hasMany(ModelRole::class);
     }
+    public function sousMenus(): ?HasMany
+     {
+        return $this->hasMany(SousMenu::class);
+     }
 
 }

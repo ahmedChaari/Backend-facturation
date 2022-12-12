@@ -99,5 +99,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('updateUnity/{unity}',[UnityController::class, 'updateUnity']);
 
      //mode Role
-     Route::get('listModelRole',     [ModelRoleController::class, 'listModelRole']);
+    Route::get('listModelRole',     [ModelRoleController::class, 'listModelRole']);
+
+     // menu
+    Route::get('listMenu',          [ParametreController::class, 'listMenu']);
+    Route::get('listSousMenu',      [ParametreController::class, 'listSousMenu']);
 });
