@@ -15,9 +15,9 @@ class ModelRoleResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'company_id'   => $this->company->name,
-            'menu_id'      => $this->menu,
-            'sous_menu_id' => $this->sousMenu,
+            'company'   => $this->company->name,
+            'menu'      => $this->menu,
+            'sous menu' => $this->sousMenu,
             'role_id'      => $this->role->name,
             'consulter'    => $this->consulter,
             'ajouter'      => $this->ajouter,

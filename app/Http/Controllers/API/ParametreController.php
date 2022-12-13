@@ -5,13 +5,19 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Menu\MenuResource;
 use App\Http\Resources\Menu\SousMenuResource;
+use App\Http\Resources\ModelRole\ModelRoleResource;
+use App\Http\Resources\ModelRole\RoleMResource;
+use App\Http\Resources\ModelRole\RoleResource as ModelRoleRoleResource;
 use App\Http\Resources\Parametrage\CitiesResource;
 use App\Http\Resources\Parametrage\CountiesResource;
+use App\Http\Resources\Role\RoleResource;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Menu;
+use App\Models\Role;
 use App\Models\SousMenu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ParametreController extends Controller
 {
@@ -67,11 +73,21 @@ class ParametreController extends Controller
     //list of sousmenu
     public function listSousMenu(){
         $menus = SousMenuResource::collection(SousMenu::
-           // select('name')
              groupBy('menu_id')
-            // ->selectRaw('count(*) as total, menu_id')
              ->orderBy('id', 'asc')  
              ->get());
-            return  $menus ;
-}
+        return  $menus ;
+    }
+    //list of sousmenu
+    public function listModelRoles(){
+        $company  = Auth::user()->company_id;
+        $menus = RoleMResource::collection(Role::
+             whereHas('modelRoles', function ($query) use($company) {
+                $query->where('company_id', $company);
+            })
+            ->with('modelRoles')
+            ->orderBy('id', 'asc')  
+            ->get());
+        return  $menus ;
+    }
 }

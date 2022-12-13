@@ -104,4 +104,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
      // menu
     Route::get('listMenu',          [ParametreController::class, 'listMenu']);
     Route::get('listSousMenu',      [ParametreController::class, 'listSousMenu']);
+    Route::get('listModelRoles',    [ParametreController::class, 'listModelRoles']);
 });
