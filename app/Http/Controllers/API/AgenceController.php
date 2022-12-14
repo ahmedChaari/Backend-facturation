@@ -77,7 +77,6 @@ class AgenceController extends Controller
           'message'    => 'update a agence of company !',
           ], 200); 
     }
-
     //delete agence
     public function deleteAgence($id)
     {

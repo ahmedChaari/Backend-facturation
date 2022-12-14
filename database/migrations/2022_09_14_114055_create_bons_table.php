@@ -16,18 +16,20 @@ class CreateBonsTable extends Migration
         Schema::create('bons', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('company_id');
-            $table->string('name');
+            $table->date('date_bon');   // Date de Bon + date_echeance
+            $table->text('description')->nullable();
             $table->foreignUuid('deposit_id');
-            $table->foreignUuid('deposit_destination_id');
-            $table->date('date_bon');
-            $table->foreignUuid('bon_type_id');
-            $table->text('description');
-            $table->foreignUuid('customer_id');
-            $table->date('date_echeance');
-            $table->enum('mode_relement',['ES','CQ','VR','CB','EF']); // ESPACE , CHEQUE , VERMENT , CARTE BANCAIRE , effet
-            $table->integer('remise');
+            $table->boolean('valid');
+            $table->string('bon_type');  // bon entre bon sorte ......
+            $table->string('reference');
+            $table->foreignUuid('user_id');  // user authen
+            $table->string('name')->nullable();
+            $table->foreignUuid('deposit_destination_id')->nullable();
+            $table->enum('mode_relement',['ES','CQ','VR','CB','EF'])->nullable(); // ESPACE , CHEQUE , VERMENT , CARTE BANCAIRE , effet
+            $table->integer('remise')->nullable();
+            $table->softDeletes();
             $table->timestamps();
-            ///non non
+            //non non
         });
     }
 

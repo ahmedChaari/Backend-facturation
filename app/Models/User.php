@@ -67,5 +67,9 @@ class User extends Authenticatable
      {
         return $this->hasMany(Product::class);
      }
-
+     // bon
+     public function bons(): ?HasMany
+     {
+        return $this->hasMany(Bon::class);
+     }
 }

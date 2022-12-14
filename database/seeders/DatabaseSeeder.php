@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             UnitySeeder::class,
             UserSeeder::class,
             ProdcutSeeder::class,
+            BonSeeder::class,
         ]);
     }
 }

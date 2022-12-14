@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AgenceController;
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Auth\NewPasswordController;
+use App\Http\Controllers\API\BonController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ClientTypeController;
 use App\Http\Controllers\API\CompanyController;
@@ -105,4 +106,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('listMenu',          [ParametreController::class, 'listMenu']);
     Route::get('listSousMenu',      [ParametreController::class, 'listSousMenu']);
     Route::get('listModelRoles',    [ParametreController::class, 'listModelRoles']);
+
+    //bon
+    Route::get('listBonEntres',         [BonController::class, 'listBonEntres']);
+    Route::post('storBonEntre',         [BonController::class, 'storBonEntre']);
+    Route::put('updateBonEntre/{bon}',  [BonController::class, 'updateBonEntre']);
+    Route::put('validBonEntre/{id}',    [BonController::class, 'validBonEntre']);
+    Route::delete('deleteBonEntre/{id}',[BonController::class, 'deleteBonEntre']);
+    Route::put('restoreBonEntre/{id}',  [BonController::class, 'restoreBonEntre']);
+
 });

@@ -46,8 +46,12 @@ class Company extends Model
      {
         return $this->hasMany(Unity::class);
      }
-
-     
+     // bon
+     public function bons(): ?HasMany
+     {
+        return $this->hasMany(Bon::class);
+     }
+    
      public function modelRoles(): ?HasMany
      {
         return $this->hasMany(ModelRole::class);

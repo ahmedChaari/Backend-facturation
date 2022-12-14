@@ -24,4 +24,9 @@ class Deposit extends Model
      {
         return $this->hasMany(Product::class);
      }
+     // bon
+     public function bons(): ?HasMany
+     {
+        return $this->hasMany(Bon::class);
+     }
 }
