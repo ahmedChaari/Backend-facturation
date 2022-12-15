@@ -18,13 +18,14 @@ class CreateBonsTable extends Migration
             $table->foreignUuid('company_id');
             $table->date('date_bon');   // Date de Bon + date_echeance
             $table->text('description')->nullable();
-            $table->foreignUuid('deposit_id');
+            $table->foreignUuid('deposit_id')->nullable();
             $table->boolean('valid');
             $table->string('bon_type');  // bon entre bon sorte ......
             $table->string('reference');
             $table->foreignUuid('user_id');  // user authen
             $table->string('name')->nullable();
-            $table->foreignUuid('deposit_destination_id')->nullable();
+            $table->foreignUuid('source_id')->nullable()->references('id')->on('deposits');
+            $table->foreignUuid('destination_id')->nullable()->references('id')->on('deposits');
             $table->enum('mode_relement',['ES','CQ','VR','CB','EF'])->nullable(); // ESPACE , CHEQUE , VERMENT , CARTE BANCAIRE , effet
             $table->integer('remise')->nullable();
             $table->softDeletes();
@@ -32,7 +33,6 @@ class CreateBonsTable extends Migration
             //non non
         });
     }
-
     /**
      * Reverse the migrations.
      *

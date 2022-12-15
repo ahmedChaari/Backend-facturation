@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AgenceController;
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Auth\NewPasswordController;
 use App\Http\Controllers\API\BonController;
+use App\Http\Controllers\API\BonTransfertController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ClientTypeController;
 use App\Http\Controllers\API\CompanyController;
@@ -118,4 +119,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // bon sortie
     Route::get('listBonSorties',        [BonController::class, 'listBonSorties']);
     Route::post('storeBonSortie',       [BonController::class, 'storeBonSortie']);
+
+    // bon Transfert
+    Route::get('listBonSorties',        [BonTransfertController::class, 'listBonSorties']);
+    Route::post('storeBonTransfert',    [BonTransfertController::class, 'storeBonTransfert']);
 });

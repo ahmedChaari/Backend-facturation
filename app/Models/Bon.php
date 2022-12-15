@@ -33,4 +33,13 @@ class Bon extends Model
     {
       return $this->belongsToMany(Product::class);
     }
+
+    public function source()
+    {
+        return $this->hasMany(Deposit::class, 'source_id');
+    }
+    public function destination()
+    {
+        return $this->hasMany(Deposit::class, 'destination_id');
+    }
 }

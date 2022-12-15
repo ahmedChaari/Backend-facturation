@@ -29,4 +29,14 @@ class Deposit extends Model
      {
         return $this->hasMany(Bon::class);
      }
+
+     public function sources(): ?HasMany
+     {
+        return $this->hasMany(Bon::class, 'source_id');
+     }
+
+     public function destinations(): ?HasMany
+     {
+        return $this->hasMany(Bon::class, 'destination_id');
+     }
 }
