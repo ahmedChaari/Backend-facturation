@@ -17,13 +17,28 @@ class BonController extends Controller
         
             $bones = BonResource::collection(Bon::latest()
                 ->where('company_id', $company)
+                ->where('bon_type', 'BE')
                 ->get());
             return response([
                 $bones,
                 'message'    => 'list of agence !',
                 ], 200);
      }
-     public function storBonEntre(BonRequest $request){
+     public function listBonSorties(Request $request){
+        $query    =  $request->get('search');
+        $company  = Auth::user()->company_id;
+        
+            $bones = BonResource::collection(Bon::latest()
+                ->where('company_id', $company)
+                ->where('bon_type', 'BS')
+                ->get());
+            return response([
+                $bones,
+                'message'    => 'list of agence !',
+                ], 200);
+     }
+     //bon entree
+     public function storeBonEntre(BonRequest $request){
 
         $company  = Auth::user()->company_id;
         $userId  = Auth::user()->id;
@@ -49,7 +64,34 @@ class BonController extends Controller
         'message'    => 'create a new Bon Entree !',
         ], 200); 
      }
+     // Create Bon Sotrie
+     public function storeBonSortie(BonRequest $request){
 
+        $company  = Auth::user()->company_id;
+        $userId  = Auth::user()->id;
+        $date = date('dy');
+        $reference = 'BS'.$date.'-'.rand(10000,100);
+        $bonType = 'BS' ;
+        $valid = 0 ;
+        $bonEntre = Bon::create([   
+            'company_id' => $company, 
+            'deposit_id' => $request['deposit_id'],
+            'description'=> $request['description'], 
+            'date_bon'   => $request['date_bon'],
+            'user_id'    => $userId,
+            'bon_type'   => $bonType,
+            'reference'  => $reference, 
+            'valid'      => $valid, 
+      ]);                  
+        $productArray = explode("," ,$request->products);
+        $bonEntre->products()->attach($productArray);
+        
+      return response([
+        new  BonResource($bonEntre),
+        'message'    => 'create a new Bon Entree !',
+        ], 200); 
+     }
+     // update bon Entre and sotie
      public function updateBonEntre(BonRequest $request,Bon $bon){
 
         $bon->update([   
@@ -67,6 +109,7 @@ class BonController extends Controller
           ], 200); 
 
      }
+     // valid bon entre and sortie
      public function validBonEntre(Request $request,$id){
 
         $bon = Bon::find($id);

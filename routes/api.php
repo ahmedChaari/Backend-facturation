@@ -83,7 +83,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
      Route::get('listCountries',       [ParametreController::class, 'listCountries']);
      Route::get('listCities',          [ParametreController::class, 'listCities']);
 
-     //agences 
+    //agences 
     Route::post('storeAgence',         [AgenceController::class, 'storeAgence']);
     Route::get('listAgences',          [AgenceController::class, 'listAgences']);
     Route::delete('deleteAgence/{id}', [AgenceController::class, 'deleteAgence']);
@@ -94,25 +94,28 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('storeClientType',     [ClientTypeController::class, 'storeClientType']);
     Route::put('updateClientType/{clientType}',[ClientTypeController::class, 'updateClientType']);
 
-     //unity 
+    //unity 
     Route::get('listUnities',        [UnityController::class, 'listUnities']);
     Route::post('storeUnity',        [UnityController::class, 'storeUnity']);
     Route::put('updateUnity/{unity}',[UnityController::class, 'updateUnity']);
 
-     //mode Role
+    //mode Role
     Route::get('listModelRole',     [ModelRoleController::class, 'listModelRole']);
 
-     // menu
+    // menu
     Route::get('listMenu',          [ParametreController::class, 'listMenu']);
     Route::get('listSousMenu',      [ParametreController::class, 'listSousMenu']);
     Route::get('listModelRoles',    [ParametreController::class, 'listModelRoles']);
 
-    //bon
+    // bon Entre
     Route::get('listBonEntres',         [BonController::class, 'listBonEntres']);
-    Route::post('storBonEntre',         [BonController::class, 'storBonEntre']);
+    Route::post('storeBonEntre',        [BonController::class, 'storeBonEntre']);
     Route::put('updateBonEntre/{bon}',  [BonController::class, 'updateBonEntre']);
     Route::put('validBonEntre/{id}',    [BonController::class, 'validBonEntre']);
     Route::delete('deleteBonEntre/{id}',[BonController::class, 'deleteBonEntre']);
     Route::put('restoreBonEntre/{id}',  [BonController::class, 'restoreBonEntre']);
 
+    // bon sortie
+    Route::get('listBonSorties',        [BonController::class, 'listBonSorties']);
+    Route::post('storeBonSortie',       [BonController::class, 'storeBonSortie']);
 });

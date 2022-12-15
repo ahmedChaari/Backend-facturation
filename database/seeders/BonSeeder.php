@@ -14,6 +14,6 @@ class BonSeeder extends Seeder
      */
     public function run()
     {
-        Bon::factory(30)->create();
+        Bon::factory(40)->create();
     }
 }
