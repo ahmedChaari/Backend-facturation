@@ -17,6 +17,8 @@ class CreateBonProductTable extends Migration
             $table->id();
             $table->foreignUuid('bon_id')->constrained();
             $table->foreignUuid('product_id')->constrained();
+            $table->integer('amount');
+            $table->integer('price');
             $table->timestamps();
         });
     }

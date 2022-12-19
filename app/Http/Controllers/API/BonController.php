@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Bon\BonRequest;
 use App\Http\Resources\Bon\BonResource;
 use App\Models\Bon;
+use App\Models\BonProduct;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,15 +58,39 @@ class BonController extends Controller
             'reference'  => $reference, 
             'valid'      => $valid, 
       ]);                  
-        $productArray = explode("," ,$request->products);
-        $bonEntre->products()->attach($productArray);
+       // $productArray = explode("," ,$request->products);
+       // $bonEntre->products()->attach($productArray);
+
+
+        
+   // $componentArray = explode("," ,$request->component_id);
+    $productArray = explode("," ,$request->products);
+    //$pricearray     = explode("," ,$request->priceC);
+    $amountArray     = explode("," ,$request->amount);
+   // $requiredComponentArray     = explode("," ,$request->required_component);
+    $priceArray      = explode("," ,$request->price);
+    $index =0 ;
+    foreach ($productArray as $productSingle){
+        $BnProduct      = new BonProduct();
+        $BnProduct->bon_id      = $bonEntre->id;
+        $BnProduct->product_id  = $productSingle;
+        $BnProduct->price       = $priceArray[$index];
+        $BnProduct->amount      = $amountArray[$index];
+        $BnProduct->save();
+        $index++; 
+    }
+
         
       return response([
         new  BonResource($bonEntre),
         'message'    => 'create a new Bon Entree !',
         ], 200); 
      }
-     // Create Bon Sotrie
+     // ** Create Bon Sotrie
+
+
+
+     //** //
      public function storeBonSortie(BonRequest $request){
 
         $company  = Auth::user()->company_id;
@@ -83,9 +109,40 @@ class BonController extends Controller
             'reference'  => $reference, 
             'valid'      => $valid, 
       ]);                  
-        $productArray = explode("," ,$request->products);
-        $bonEntre->products()->attach($productArray);
+       // $productArray = explode("," ,$request->products);
+        //$bonEntre->products()->attach($productArray);
+
+
+
         
+
+   // $componentArray = explode("," ,$request->component_id);
+    $productArray = explode("," ,$request->products);
+    //$pricearray     = explode("," ,$request->priceC);
+    $amountArray     = explode("," ,$request->amount);
+   // $requiredComponentArray     = explode("," ,$request->required_component);
+    $priceArray      = explode("," ,$request->price);
+    $index =0 ;
+    foreach ($productArray as $productSingle){
+        $BnProduct      = new BonProduct();
+        $BnProduct->bon_id      = $bonEntre->id;
+        $BnProduct->product_id  = $productSingle;
+        $BnProduct->price       = $priceArray[$index];
+        $BnProduct->amount      = $amountArray[$index];
+        $BnProduct->save();
+        $index++; 
+    }
+    //$amountArray     = explode("," ,$request->amount);
+
+    foreach ($productArray as $ProductSingle){
+      $product= Product::findOrFail($ProductSingle);
+      $product->update([   
+          'quantite_initial'     =>  $amountArray[$index],
+          ]);
+          $index++;
+    }
+
+
       return response([
         new  BonResource($bonEntre),
         'message'    => 'create a new Bon Entree !',

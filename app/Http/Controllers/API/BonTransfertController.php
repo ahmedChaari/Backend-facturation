@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Bon\BonResource;
 use App\Http\Resources\Bon\BonTransfertResource;
 use App\Models\Bon;
+use App\Models\BonProduct;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,12 +33,49 @@ class BonTransfertController extends Controller
             'reference'  => $reference, 
             'valid'      => $valid,
       ]);                  
-        $productArray = explode("," ,$request->products);
-        $bonEntre->products()->attach($productArray);
-        
+   // $productArray = explode("," ,$request->products);
+   // $bonEntre->products()->attach($productArray);
+
+
+
+   // $componentArray = explode("," ,$request->component_id);
+    $productArray = explode("," ,$request->products);
+    //$pricearray     = explode("," ,$request->priceC);
+    $amountArray     = explode("," ,$request->amount);
+   // $requiredComponentArray     = explode("," ,$request->required_component);
+    $priceArray      = explode("," ,$request->price);
+    $index =0 ;
+    foreach ($productArray as $productSingle){
+        $BnProduct      = new BonProduct();
+        $BnProduct->bon_id      = $bonEntre->id;
+        $BnProduct->product_id  = $productSingle;
+        $BnProduct->price       = $priceArray[$index];
+        $BnProduct->amount      = $amountArray[$index];
+        $BnProduct->save();
+
+        $product= Product::findOrFail($BnProduct->product_id);
+        $product->update([   
+            'quantite_initial'     =>  $amountArray[$index],
+            ]);
+        $index++; 
+    }
+
+
+
+
+
+
+
+       // foreach ($productArray as $ProductSingle){
+       //     $product= Product::findOrFail($ProductSingle);
+       //     $product->update([   
+             //   'deposit_id'     =>  $bonEntre->destination_id,
+      //          ]);
+     //   }
+
       return response([
         new  BonTransfertResource($bonEntre),
-        'message'    => 'create a new Bon Entree !',
+        'message'    => 'create a new Bon Transfert !',
         ], 200); 
      }
 }

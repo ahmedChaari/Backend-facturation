@@ -15,8 +15,8 @@ class BonTransfertResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'destination_id'  => $this->destination,
-           // 'deposit_source_id'       => $this->depositDestination,
+            'depot source'       => $this->source,
+            'depot destination'  => $this->destination,
             'id'          => $this->id,
             'reference'   => $this->reference,
             'company_id'  => $this->company->name,
@@ -24,7 +24,7 @@ class BonTransfertResource extends JsonResource
             'description' => $this->description,
             'valid'       => $this->valid,
             'bon_type'    => $this->bon_type,
-            'user_id'     => $this->user->nom,
+            'Create with user'     => $this->user->nom,
             'products'    => $this->products,
         ];
     }
