@@ -33,9 +33,16 @@ class BonTransfertController extends Controller
             'reference'  => $reference, 
             'valid'      => $valid,
       ]);                  
-   
-    $productArray    = explode("," ,$request->products);
+   // $productArray = explode("," ,$request->products);
+   // $bonEntre->products()->attach($productArray);
+
+
+
+   // $componentArray = explode("," ,$request->component_id);
+    $productArray = explode("," ,$request->products);
+    //$pricearray     = explode("," ,$request->priceC);
     $amountArray     = explode("," ,$request->amount);
+   // $requiredComponentArray     = explode("," ,$request->required_component);
     $priceArray      = explode("," ,$request->price);
     $index =0 ;
     foreach ($productArray as $productSingle){
@@ -45,11 +52,24 @@ class BonTransfertController extends Controller
         $BnProduct->price       = $priceArray[$index];
         $BnProduct->amount      = $amountArray[$index];
         $BnProduct->save();
+
+        $product= Product::findOrFail($BnProduct->product_id);
+        $product->update([   
+            'quantite_initial'     =>  $amountArray[$index],
+            ]);
         $index++; 
     }
+
+       // foreach ($productArray as $ProductSingle){
+       //     $product= Product::findOrFail($ProductSingle);
+       //     $product->update([   
+             //   'deposit_id'     =>  $bonEntre->destination_id,
+      //          ]);
+     //   }
+
       return response([
         new  BonTransfertResource($bonEntre),
         'message'    => 'create a new Bon Transfert !',
         ], 200); 
-    }
+     }
 }

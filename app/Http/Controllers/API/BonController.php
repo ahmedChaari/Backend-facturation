@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Bon\BonRequest;
 use App\Http\Resources\Bon\BonResource;
+use App\Http\Resources\Bon\HistoriqueBonResource;
 use App\Models\Bon;
 use App\Models\BonProduct;
 use App\Models\Product;
@@ -58,16 +59,10 @@ class BonController extends Controller
             'reference'  => $reference, 
             'valid'      => $valid, 
       ]);                  
-       // $productArray = explode("," ,$request->products);
-       // $bonEntre->products()->attach($productArray);
+     
 
-
-        
-   // $componentArray = explode("," ,$request->component_id);
     $productArray = explode("," ,$request->products);
-    //$pricearray     = explode("," ,$request->priceC);
     $amountArray     = explode("," ,$request->amount);
-   // $requiredComponentArray     = explode("," ,$request->required_component);
     $priceArray      = explode("," ,$request->price);
     $index =0 ;
     foreach ($productArray as $productSingle){
@@ -109,22 +104,13 @@ class BonController extends Controller
             'reference'  => $reference, 
             'valid'      => $valid, 
       ]);                  
-       // $productArray = explode("," ,$request->products);
-        //$bonEntre->products()->attach($productArray);
 
-
-
-        
-
-   // $componentArray = explode("," ,$request->component_id);
     $productArray = explode("," ,$request->products);
-    //$pricearray     = explode("," ,$request->priceC);
     $amountArray     = explode("," ,$request->amount);
-   // $requiredComponentArray     = explode("," ,$request->required_component);
     $priceArray      = explode("," ,$request->price);
     $index =0 ;
     foreach ($productArray as $productSingle){
-        $BnProduct      = new BonProduct();
+        $BnProduct              = new BonProduct();
         $BnProduct->bon_id      = $bonEntre->id;
         $BnProduct->product_id  = $productSingle;
         $BnProduct->price       = $priceArray[$index];
@@ -132,17 +118,6 @@ class BonController extends Controller
         $BnProduct->save();
         $index++; 
     }
-    //$amountArray     = explode("," ,$request->amount);
-
-    foreach ($productArray as $ProductSingle){
-      $product= Product::findOrFail($ProductSingle);
-      $product->update([   
-          'quantite_initial'     =>  $amountArray[$index],
-          ]);
-          $index++;
-    }
-
-
       return response([
         new  BonResource($bonEntre),
         'message'    => 'create a new Bon Entree !',
@@ -167,6 +142,10 @@ class BonController extends Controller
 
      }
      // valid bon entre and sortie
+
+     //valider bon entre and make update for mroduct amount
+
+     //
      public function validBonEntre(Request $request,$id){
 
         $bon = Bon::find($id);
@@ -174,11 +153,23 @@ class BonController extends Controller
             'valid'    => $request->valid,
           ]); 
 
+          
+      
+      $product= BonProduct::where('bon_id', $id)->first();
+      
+
+       $productId= BonProduct::findOrFail($product->product_id);
+        
+    
+        dd($productId);
+
+
+
         return response([
-            new  BonResource($bon),
+         $product,
+           // new  BonResource($bon),
           'message'    => 'valid the Bon Entree of company !',
           ], 200); 
-
      }
 
      //delete Deposit
@@ -203,6 +194,22 @@ class BonController extends Controller
         return response([
             'message'    => 'The Bon Entree was Restored',
             ], 201);
+    } 
     
-    }  
+    public function getHistoriqueProductBon(Request $request){
+
+        $query    =  $request->get('search');
+        $company  = Auth::user()->company_id;
+
+        $not_ids = ['BS','BT','BE'];
+            $bones = HistoriqueBonResource::collection(BonProduct::latest()
+              //  ->where('company_id', $company)
+                ->orderBy('created_at', 'DESC')
+               // ->whereIn('bon_type', $not_ids)
+                ->simplePaginate(5));
+        return response([
+            $bones,
+            'message'    => 'list of Historique of bon !',
+            ], 200);
+    }
 }

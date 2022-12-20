@@ -123,4 +123,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // bon Transfert
     Route::get('listBonSorties',        [BonTransfertController::class, 'listBonSorties']);
     Route::post('storeBonTransfert',    [BonTransfertController::class, 'storeBonTransfert']);
+
+    //bon Historique
+    Route::get('getHistoriqueProductBon',     [BonController::class, 'getHistoriqueProductBon']);
 });
