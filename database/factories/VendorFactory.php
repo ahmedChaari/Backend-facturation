@@ -17,7 +17,7 @@ class VendorFactory extends Factory
         return [
             'id'         => $this->faker->uuid,
             'company_id' => Company::all()->random()->id,
-            'descreption'=> $this->faker->paragraph(),
+            'designation'=> $this->faker->paragraph(),
             'RC'         => $this->faker->name,
             'tel'        => $this->faker->phoneNumber,
             'fax'        => $this->faker->phoneNumber,

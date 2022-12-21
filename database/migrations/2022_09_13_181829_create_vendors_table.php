@@ -16,7 +16,7 @@ class CreateVendorsTable extends Migration
         Schema::create('vendors', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('company_id');
-            $table->text('descreption');
+            $table->text('designation');
             $table->string('RC');
             $table->string('tel');
             $table->string('fax')->nullable();
@@ -28,7 +28,6 @@ class CreateVendorsTable extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

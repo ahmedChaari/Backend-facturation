@@ -15,6 +15,7 @@ use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\UnityController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\VendorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -125,5 +126,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('storeBonTransfert',    [BonTransfertController::class, 'storeBonTransfert']);
 
     //bon Historique
-    Route::get('getHistoriqueProductBon',     [BonController::class, 'getHistoriqueProductBon']);
+    Route::get('getHistoriqueProductBon',[BonController::class, 'getHistoriqueProductBon']);
+
+    //vendor
+    Route::get('listVendor',             [VendorController::class, 'listVendor']);
+    Route::post('storeVendor',           [VendorController::class, 'storeVendor']);
+    Route::put('updateVendor/{vendor}',  [VendorController::class, 'updateVendor']);
+    Route::delete('deleteVendor/{id}',   [VendorController::class, 'deleteVendor']);
+    Route::put('restoreVendor/{id}',     [VendorController::class, 'restoreVendor']);
+
 });

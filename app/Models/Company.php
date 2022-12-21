@@ -57,6 +57,13 @@ class Company extends Model
         return $this->hasMany(ModelRole::class);
      }
 
+     public function vendors(): ?HasMany
+     {
+        return $this->hasMany(Vendor::class);
+     }
+
+     
+
 public function storeRoleCompany($company){
       $i = 5 ;
       $n = 10 ;

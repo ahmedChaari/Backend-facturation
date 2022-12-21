@@ -158,10 +158,10 @@ class BonController extends Controller
       $product= BonProduct::where('bon_id', $id)->first();
       
 
+      dd($product);
        $productId= BonProduct::findOrFail($product->product_id);
         
     
-        dd($productId);
 
 
 
