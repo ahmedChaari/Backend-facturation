@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class VendorFactory extends Factory
@@ -17,6 +18,7 @@ class VendorFactory extends Factory
         return [
             'id'         => $this->faker->uuid,
             'company_id' => Company::all()->random()->id,
+            'user_id'    => User::all()->random()->id,
             'designation'=> $this->faker->paragraph(),
             'RC'         => $this->faker->name,
             'tel'        => $this->faker->phoneNumber,

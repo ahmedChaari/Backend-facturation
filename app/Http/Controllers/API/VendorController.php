@@ -32,9 +32,11 @@ class VendorController extends Controller
     public function storeVendor(VendorRequest $request){
 
         $company  = Auth::user()->company_id;
+        $user     = Auth::user()->id;
       
         $category         = Vendor::create([
             'company_id'    => $company, 
+            'user_id'       => $user, 
             'designation'   => $request['designation'],
             'RC'            => $request['RC'],
             'tel'           => $request['tel'],

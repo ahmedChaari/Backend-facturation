@@ -72,4 +72,9 @@ class User extends Authenticatable
      {
         return $this->hasMany(Bon::class);
      }
+     // vendors
+     public function vendors(): ?HasMany
+     {
+        return $this->hasMany(Vendor::class);
+     }
 }

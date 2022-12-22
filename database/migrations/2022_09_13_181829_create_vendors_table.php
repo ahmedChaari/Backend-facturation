@@ -16,6 +16,7 @@ class CreateVendorsTable extends Migration
         Schema::create('vendors', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('company_id');
+            $table->foreignUuid('user_id');
             $table->text('designation');
             $table->string('RC');
             $table->string('tel');

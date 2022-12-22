@@ -155,18 +155,31 @@ class BonController extends Controller
 
           
       
-      $product= BonProduct::where('bon_id', $id)->first();
+      $productArray= BonProduct::where(array(
+        'bon_id'=> $id
+      ))->get()->toArray();
       
 
-      dd($product);
-       $productId= BonProduct::findOrFail($product->product_id);
-        
+      //dd($productArray);
+      // $productId= BonProduct::findOrFail($product->product_id);
+      
+     
     
+       foreach ($productArray as $productSingle['product_id']){
+            $productId= Product::findOrFail( $productSingle);
+
+            dd($productId);
+            $index =0 ;
+          //    Product::update([   
+          //     'quantite_initial'     =>  $productSingle->amount[$index],
+          //     ]);
+          // $index++; 
+       }
 
 
 
         return response([
-         $product,
+         //$product,
            // new  BonResource($bon),
           'message'    => 'valid the Bon Entree of company !',
           ], 200); 

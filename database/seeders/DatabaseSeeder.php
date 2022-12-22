@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             MenuSeeder::class,
             SousMenuSeeder::class,
             CompanySeeder::class,
-            VendorSeeder::class,
             CategorySeeder:: class,
             DepositSeeder::class, 
             RoleSeeder::class,
@@ -30,6 +29,7 @@ class DatabaseSeeder extends Seeder
             ClientTypeSeeder::class,
             UnitySeeder::class,
             UserSeeder::class,
+            VendorSeeder::class,
             ProdcutSeeder::class,
             BonSeeder::class,
         ]);

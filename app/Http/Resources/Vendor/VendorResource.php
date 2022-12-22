@@ -25,6 +25,7 @@ class VendorResource extends JsonResource
             'ville'       => $this->ville,
             'email'       => $this->email,
             'adresse'     => $this->adresse,
+            'user'        => $this->user,
         ];
     }
 }
