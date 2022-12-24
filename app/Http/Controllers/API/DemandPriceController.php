@@ -53,7 +53,31 @@ class DemandPriceController extends Controller
         'message'    => 'update a new Bon Entree !',
         ], 200); 
      }
-     public function updateProductDemPrice(Request $request,DemandPrice $demandPrice){
+     public function updateProductDemPrice(Request $request,DemandPriceProduct $demandPriceProduct){
+      $demandPriceProduct->update([   
+        'price'   => $request['price'],            
+        'amount'  => $request['amount'],
+      ]); 
+      return response([
+        $demandPriceProduct,
+        //new  BonResource($demandPrice),
+        'message'    => 'update a new Bon Entree !',
+        ], 200); 
+     }
 
+     //delete Product for demand Price
+     public function deleteProductDemPrice($id)
+     {
+           $product = DemandPriceProduct::find($id);
+           if (isset($product)) {
+               $product = DemandPriceProduct::find($id)->destroy($id);
+               return response([
+                   'message'    => 'The Product was Deleted',
+                   ], 200);
+           }else{
+               return response([
+                   'message'    => 'The Product does\'n existing',
+                   ], 401);
+           }
      }
 }

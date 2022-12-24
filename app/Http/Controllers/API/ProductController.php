@@ -184,7 +184,7 @@ class ProductController extends Controller
       ], 200); 
 
     }
-     //delete Deposit
+     //delete Product
      public function deleteProduct($id)
      {
            $product = Product::find($id);
