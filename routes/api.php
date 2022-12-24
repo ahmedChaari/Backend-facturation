@@ -8,6 +8,7 @@ use App\Http\Controllers\API\BonTransfertController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ClientTypeController;
 use App\Http\Controllers\API\CompanyController;
+use App\Http\Controllers\API\DemandPriceController;
 use App\Http\Controllers\API\DepositController;
 use App\Http\Controllers\API\ModelRoleController;
 use App\Http\Controllers\API\ParametreController;
@@ -134,5 +135,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('updateVendor/{vendor}',  [VendorController::class, 'updateVendor']);
     Route::delete('deleteVendor/{id}',   [VendorController::class, 'deleteVendor']);
     Route::put('restoreVendor/{id}',     [VendorController::class, 'restoreVendor']);
+
+    //Demand Price
+    Route::post('storeDemandPrice',      [DemandPriceController::class, 'storeDemandPrice']);
 
 });

@@ -40,4 +40,9 @@ class Product extends Model
       return $this->belongsToMany(Bon::class); 
     }
 
+    public function demandPrices(): ?BelongsToMany
+    {
+      return $this->belongsToMany(DemandPrice::class); 
+    }
+
 }
