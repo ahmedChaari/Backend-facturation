@@ -29,4 +29,9 @@ class Vendor extends Model
      {
          return $this->belongsTo(User::class);
      }
+
+     public function demandPrices(): ?HasMany
+     {
+        return $this->hasMany(DemandPrice::class);
+     }
 }

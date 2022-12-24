@@ -77,4 +77,9 @@ class User extends Authenticatable
      {
         return $this->hasMany(Vendor::class);
      }
+
+     public function demandPrices(): ?HasMany
+     {
+        return $this->hasMany(DemandPrice::class);
+     }
 }

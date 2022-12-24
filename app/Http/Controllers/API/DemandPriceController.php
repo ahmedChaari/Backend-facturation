@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DemandPrice\demandPriceResource;
+use App\Http\Resources\DemandPrice\ProductDemandPriceResource;
 use App\Models\DemandPrice;
 use App\Models\DemandPriceProduct;
 use Illuminate\Http\Request;
@@ -37,35 +39,45 @@ class DemandPriceController extends Controller
         $index++; 
     }
       return response([
-        $demandPrice,
-        //new  BonResource($demandPrice),
+        //$demandPrice,
+        new  DemandPriceResource($demandPrice),
         'message'    => 'create a new Bon Entree !',
         ], 200); 
      }
+
+     //update demand price
+
+     //
      public function updateDemandPrice(Request $request,DemandPrice $demandPrice){
       $demandPrice->update([   
         'date_demand_price'=> $request['date_demand_price'],            
         'vendor_id'        => $request['vendor_id'],
       ]); 
       return response([
-        $demandPrice,
-        //new  BonResource($demandPrice),
+       
+        new  DemandPriceResource($demandPrice),
         'message'    => 'update a new Bon Entree !',
         ], 200); 
      }
+
+    //update product demand price
+
+     //
+
      public function updateProductDemPrice(Request $request,DemandPriceProduct $demandPriceProduct){
       $demandPriceProduct->update([   
         'price'   => $request['price'],            
         'amount'  => $request['amount'],
       ]); 
       return response([
-        $demandPriceProduct,
-        //new  BonResource($demandPrice),
+        new  ProductDemandPriceResource($demandPriceProduct),
         'message'    => 'update a new Bon Entree !',
         ], 200); 
      }
 
      //delete Product for demand Price
+
+     //
      public function deleteProductDemPrice($id)
      {
            $product = DemandPriceProduct::find($id);
@@ -73,6 +85,27 @@ class DemandPriceController extends Controller
                $product = DemandPriceProduct::find($id)->destroy($id);
                return response([
                    'message'    => 'The Product was Deleted',
+                   ], 200);
+           }else{
+               return response([
+                   'message'    => 'The Product does\'n existing',
+                   ], 401);
+           }
+     }
+
+     //show product for demand price
+
+     //
+     public function showProductDemPrice($id)
+     {
+          // $product = DemandPriceProduct::where('product_id', $idProduct)->get();
+
+           $product = DemandPriceProduct::find($id);
+           if (isset($product)) {
+               return response([
+                  // $product,
+                   new  ProductDemandPriceResource($product),
+                   'message'    => 'The Product existing',
                    ], 200);
            }else{
                return response([
