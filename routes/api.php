@@ -137,6 +137,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('restoreVendor/{id}',     [VendorController::class, 'restoreVendor']);
 
     //Demand Price
-    Route::post('storeDemandPrice',      [DemandPriceController::class, 'storeDemandPrice']);
+    Route::post('storeDemandPrice',              [DemandPriceController::class, 'storeDemandPrice']);
+    Route::put('updateDemandPrice/{demandPrice}',[DemandPriceController::class, 'updateDemandPrice']);
+    Route::put('updateProductDemPrice/{id}',     [DemandPriceController::class, 'updateProductDemPrice']);
+    
 
 });

@@ -42,4 +42,18 @@ class DemandPriceController extends Controller
         'message'    => 'create a new Bon Entree !',
         ], 200); 
      }
+     public function updateDemandPrice(Request $request,DemandPrice $demandPrice){
+      $demandPrice->update([   
+        'date_demand_price'=> $request['date_demand_price'],            
+        'vendor_id'        => $request['vendor_id'],
+      ]); 
+      return response([
+        $demandPrice,
+        //new  BonResource($demandPrice),
+        'message'    => 'update a new Bon Entree !',
+        ], 200); 
+     }
+     public function updateProductDemPrice(Request $request,DemandPrice $demandPrice){
+
+     }
 }
