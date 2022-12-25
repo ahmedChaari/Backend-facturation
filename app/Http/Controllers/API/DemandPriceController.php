@@ -113,4 +113,19 @@ class DemandPriceController extends Controller
                    ], 401);
            }
      }
+     public function showDemPrice($id)
+     {
+           $demandPrice = DemandPrice::find($id);
+           if (isset($demandPrice)) {
+               return response([
+                 
+                  new  DemandPriceResource($demandPrice),
+                   'message'    => 'The Product existing',
+                   ], 200);
+           }else{
+               return response([
+                   'message'    => 'The Product does\'n existing',
+                   ], 401);
+           }
+     }
 }
