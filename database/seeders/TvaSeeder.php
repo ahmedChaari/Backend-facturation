@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\tva;
+use App\Models\Tva;
 use Illuminate\Database\Seeder;
 
 class TvaSeeder extends Seeder
