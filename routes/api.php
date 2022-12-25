@@ -139,9 +139,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //Demand Price
     Route::post('storeDemandPrice',                    [DemandPriceController::class, 'storeDemandPrice']);
     Route::put('updateDemandPrice/{demandPrice}',      [DemandPriceController::class, 'updateDemandPrice']);
-    Route::put('updateProductDemPrice/{demandPriceProduct}',     [DemandPriceController::class, 'updateProductDemPrice']);
+    Route::put('updateProductDemPrice/{demandPriceProduct}',[DemandPriceController::class, 'updateProductDemPrice']);
     Route::delete('deleteProductDemPrice/{id}',        [DemandPriceController::class, 'deleteProductDemPrice']);
-    Route::get('showProductDemPrice/{id}',      [DemandPriceController::class, 'showProductDemPrice']);
-    Route::get('showDemPrice/{id}',             [DemandPriceController::class, 'showDemPrice']);
+    Route::get('showProductDemPrice/{id}',             [DemandPriceController::class, 'showProductDemPrice']);
+    Route::get('showDemPrice/{id}',                    [DemandPriceController::class, 'showDemPrice']);
+
+    // bon Commande
     
 });

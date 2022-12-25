@@ -23,6 +23,7 @@ class CreateBonsTable extends Migration
             $table->string('bon_type');  // bon entre bon sorte ......
             $table->string('reference');
             $table->foreignUuid('user_id');  // user authen
+            $table->foreignUuid('vendor_id')->nullable();  // fournisseur
             $table->string('name')->nullable();
             $table->foreignUuid('source_id')->nullable()->references('id')->on('deposits');
             $table->foreignUuid('destination_id')->nullable()->references('id')->on('deposits');

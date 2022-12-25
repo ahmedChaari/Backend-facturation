@@ -16,4 +16,6 @@ class Unity extends Model
     public function company(): ?BelongsTo
     {
         return $this->belongsTo(Company::class);
-    }}
+    }
+
+}
