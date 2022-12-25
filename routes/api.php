@@ -14,6 +14,7 @@ use App\Http\Controllers\API\ModelRoleController;
 use App\Http\Controllers\API\ParametreController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\RoleController;
+use App\Http\Controllers\API\TvaController;
 use App\Http\Controllers\API\UnityController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\VendorController;
@@ -143,7 +144,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('deleteProductDemPrice/{id}',        [DemandPriceController::class, 'deleteProductDemPrice']);
     Route::get('showProductDemPrice/{id}',             [DemandPriceController::class, 'showProductDemPrice']);
     Route::get('showDemPrice/{id}',                    [DemandPriceController::class, 'showDemPrice']);
-
     // bon Commande
+
+    // Tva
+    Route::get('listTvas/',             [TvaController::class, 'listTvas']);
     
 });

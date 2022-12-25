@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Deposit;
+use App\Models\Tva;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -32,7 +33,8 @@ class ProductFactory extends Factory
             'unite'        => $this->faker->randomElement(['kg','metre','littre','piece']) ,
             'code_bare'    => $this->faker->numerify('#####'),
             'stock_min'    => $this->faker->numerify('##'),
-            'tva'          => $this->faker->numerify('##'),
+           // 'tva'          => $this->faker->numerify('##'),
+            'tva_id'       => Tva::all()->random()->id,
             'actif'        => $this->faker->boolean(),
             'rayon_a'      => $this->faker->name,
             'rayon_b'      => $this->faker->name,

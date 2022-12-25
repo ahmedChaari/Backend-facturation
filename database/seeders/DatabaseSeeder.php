@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             ClientTypeSeeder::class,
             UnitySeeder::class,
             UserSeeder::class,
+            TvaSeeder::class,
             VendorSeeder::class,
             ProdcutSeeder::class,
             BonSeeder::class,

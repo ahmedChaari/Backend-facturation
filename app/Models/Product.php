@@ -49,4 +49,9 @@ class Product extends Model
     {
        return $this->hasMany(Vendor::class);
     }
+
+    public function tva(): ?BelongsTo
+     {
+        return $this->belongsTo(Tva::class);
+     }
 }

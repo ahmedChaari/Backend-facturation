@@ -28,7 +28,8 @@ class CreateProductsTable extends Migration
             $table->enum('unite',['kg','metre','littre','piece']);
             $table->bigInteger('code_bare');
             $table->integer('stock_min');
-            $table->string('TVA');
+            $table->foreignUuid('tva_id');
+            //$table->string('TVA');
             $table->boolean('actif');
             $table->string('rayon_a')->nullable();
             $table->string('rayon_b')->nullable();
