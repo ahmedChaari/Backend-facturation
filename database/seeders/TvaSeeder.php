@@ -29,5 +29,8 @@ class TvaSeeder extends Seeder
         Tva::create([
             'number'           => 20,
         ]);
+        Tva::create([
+            'number'           => 30,
+        ]);
     }
 }
