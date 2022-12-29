@@ -10,6 +10,7 @@ use App\Models\Bon;
 use App\Models\BonProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class BonController extends Controller
@@ -154,33 +155,17 @@ class BonController extends Controller
           ]); 
 
           
-      
-      $productArray= BonProduct::where(array(
-        'bon_id'=> $id
-      ))->get()->toArray();
+     // $productArray = [];
+      $productArray = BonProduct::where('bon_id' , $id)
+      ->get();
       
 
-      //dd($productArray);
-      // $productId= BonProduct::findOrFail($product->product_id);
-      
-     
-    
-       foreach ($productArray as $productSingle['product_id']){
-            $productId= Product::findOrFail( $productSingle);
-
-            dd($productId);
-            $index =0 ;
-          //    Product::update([   
-          //     'quantite_initial'     =>  $productSingle->amount[$index],
-          //     ]);
-          // $index++; 
-       }
 
 
 
         return response([
-         //$product,
-           // new  BonResource($bon),
+        // $productArray,
+           new  HistoriqueBonResource($productArray),
           'message'    => 'valid the Bon Entree of company !',
           ], 200); 
      }

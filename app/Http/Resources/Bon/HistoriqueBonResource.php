@@ -15,14 +15,9 @@ class HistoriqueBonResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'                 => $this->id,
-
-
-            'product_id'          => $this->product_id,
-            'bon_id'           => $this->bon_id,
-
-
-            
+            'id'              => $this->id,
+            'product_id'      => $this->product_id,
+            'bon_id'          => $this->bon_id,
         ];
     }
 }

@@ -72,4 +72,39 @@ class BonTransfertController extends Controller
         'message'    => 'create a new Bon Transfert !',
         ], 200); 
      }
+
+
 }
+
+
+
+
+dd($productArray);
+//$array = Arr::get($productArray, 'array.product_id') ;
+
+$array = Arr::hasAny($productArray, ['product_id']);
+dd($array);
+
+
+
+// $key = array_search('product_id', $array);
+//dd($key);
+//  $key2    = explode("," ,$key);
+
+
+//  foreach ($productArray as $productSingle){
+
+  
+
+ //$id = $productSingle->product_id  ;
+
+
+     // $productId= Product::findOrFail($key);
+
+      //dd($productId);
+    //  $index =0 ;
+    //    Product::update([   
+    //     'quantite_initial'     =>  $productSingle->amount[$index],
+    //     ]);
+    // $index++; 
+// }
