@@ -14,7 +14,7 @@ class CreateTvasTable extends Migration
     public function up()
     {
         Schema::create('tvas', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignUuid('company_id')->nullable()->constrained();
             $table->integer('number');
             $table->softDeletes();

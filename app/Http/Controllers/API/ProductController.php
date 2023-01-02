@@ -24,77 +24,251 @@ class ProductController extends Controller
         $query    =  $request->get('search');
         $depot    =  $request->get('depot');
         $category =  $request->get('category');
-        $vendor   = $request->get('vendor');
+        $vendor   =  $request->get('vendor');
         if(isset($query) && isset($depot) && isset($category) && isset($vendor)){
-        //     $products = ProductResource::collection(Product::latest()
-        //     ->where('company_id', $company)
-        //     ->where( function($q) use ($query) {
-        //         $q->where('code_bare',    'LIKE', "%{$query}%");
-        //         $q->orWhere('reference',  'LIKE', "%{$query}%");
-        //         $q->orWhere('designation','LIKE', "%{$query}%");
-        //         $q->orWhere('description','LIKE', "%{$query}%");
-        //         $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
-        //         $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
-        //     })  
-        //     ->whereHas('category', function ($query) use($category) {
-        //     $query->where('name', $category);
-        //     }) 
-        //     ->whereHas('deposit', function ($query) use($depot) {
-        //     $query->where('name', $depot);
-        //     })
-        //     ->paginate(10));
-        // return $products;
-        echo 'search' ;
+            $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)
+            ->where( function($q) use ($query) {
+                $q->where('code_bare',    'LIKE', "%{$query}%");
+                $q->orWhere('reference',  'LIKE', "%{$query}%");
+                $q->orWhere('designation','LIKE', "%{$query}%");
+                $q->orWhere('description','LIKE', "%{$query}%");
+                $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
+                $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
+            })  
+            ->whereHas('category', function ($query) use($category) {
+            $query->where('name', $category);
+            }) 
+            ->whereHas('deposit', function ($query) use($depot) {
+            $query->where('name', $depot);
+            })
+            ->whereHas('vendor', function ($query) use($vendor) {
+                $query->where('designation', $vendor);
+                })
+            ->paginate(10));
+        return $products;
+        echo 'search for All paramettre' ;
         }elseif (isset($vendor) ) {
-
-            
-            if (isset($vendor) && isset($category)) {
-                echo'vendor && category';
+            if (isset($category) && isset($query) && isset($vendor)){
+                $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)
+            ->where( function($q) use ($query) {
+                $q->where('code_bare',    'LIKE', "%{$query}%");
+                $q->orWhere('reference',  'LIKE', "%{$query}%");
+                $q->orWhere('designation','LIKE', "%{$query}%");
+                $q->orWhere('description','LIKE', "%{$query}%");
+                $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
+                $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
+            })  
+            ->whereHas('category', function ($query) use($category) {
+            $query->where('name', $category);
+            }) 
+            ->whereHas('vendor', function ($query) use($vendor) {
+                $query->where('designation', $vendor);
+                })
+            ->paginate(10));
+        return $products;
+                // echo 'vendor && category && search';
+            }
+            elseif (isset($vendor) && isset($query) && isset($depot)) {
+                $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)
+            ->where( function($q) use ($query) {
+                $q->where('code_bare',    'LIKE', "%{$query}%");
+                $q->orWhere('reference',  'LIKE', "%{$query}%");
+                $q->orWhere('designation','LIKE', "%{$query}%");
+                $q->orWhere('description','LIKE', "%{$query}%");
+                $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
+                $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
+            })  
+            ->whereHas('deposit', function ($query) use($depot) {
+            $query->where('name', $depot);
+            })
+            ->whereHas('vendor', function ($query) use($vendor) {
+                $query->where('designation', $vendor);
+                })
+            ->paginate(10));
+            return $products;
+                // echo 'vendor && Query && depot ';
+            }elseif (isset($vendor) && isset($category) && isset($depot)) {
+                $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)  
+            ->whereHas('category', function ($query) use($category) {
+            $query->where('name', $category);
+            }) 
+            ->whereHas('deposit', function ($query) use($depot) {
+            $query->where('name', $depot);
+            })
+            ->whereHas('vendor', function ($query) use($vendor) {
+                $query->where('designation', $vendor);
+                })
+            ->paginate(10));
+             return $products;
+                // echo 'vendor && Category && depot ';
             }elseif(isset($vendor) && isset($depot)){
-                echo 'vendor && depot';
-            }else{
-                echo 'vendor';
+                $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company) 
+            ->whereHas('deposit', function ($query) use($depot) {
+            $query->where('name', $depot);
+            })
+            ->whereHas('vendor', function ($query) use($vendor) {
+                $query->where('designation', $vendor);
+                })
+            ->paginate(10));
+             return $products;
+                // echo 'vendor && depot';
+            }elseif(isset($vendor) && isset($query)){
+                $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)
+            ->where( function($q) use ($query) {
+                $q->where('code_bare',    'LIKE', "%{$query}%");
+                $q->orWhere('reference',  'LIKE', "%{$query}%");
+                $q->orWhere('designation','LIKE', "%{$query}%");
+                $q->orWhere('description','LIKE', "%{$query}%");
+                $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
+                $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
+            })
+            ->whereHas('vendor', function ($query) use($vendor) {
+                $query->where('designation', $vendor);
+                })
+            ->paginate(10));
+            return $products;
+                // echo 'vendor && Query';
+            }elseif (isset($vendor) && isset($category)) {
+                $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)  
+            ->whereHas('category', function ($query) use($category) {
+            $query->where('name', $category);
+            }) 
+            ->whereHas('vendor', function ($query) use($vendor) {
+                $query->where('designation', $vendor);
+                })
+            ->paginate(10));
+            return $products;
+                // echo'vendor && category'; 
+            }
+            else{
+                $products = ProductResource::collection(Product::latest()
+                ->where('company_id', $company)
+                ->whereHas('vendor', function ($query) use($vendor) {
+                    $query->where('designation', $vendor);
+                    })
+                ->paginate(10));
+                 return $products;
+                // echo 'vendor';
             }
         }
         elseif(isset($query)){
-        //     $products = ProductResource::collection(Product::latest()
-        //     ->where('company_id', $company)
-        //     ->where( function($q) use ($query) {
-        //         $q->where('code_bare',    'LIKE', "%{$query}%");
-        //         $q->orWhere('reference',  'LIKE', "%{$query}%");
-        //         $q->orWhere('designation','LIKE', "%{$query}%");
-        //         $q->orWhere('description','LIKE', "%{$query}%");
-        //         $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
-        //         $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
-        //     })  
-        //     ->paginate(10));
-        // return $products;
-        echo 'search seul';
-        }elseif(isset($depot)){
-        //     $products = ProductResource::collection(Product::latest()
-        //     ->where('company_id', $company)
-        //     ->whereHas('deposit', function ($query) use($depot) {
-        //     $query->where('name', $depot);
-        //     })
-        //     ->paginate(10));
-        // return $products;
-        echo 'depot';
+            if(isset($query) && isset($depot) && isset($category) ) {
+                $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)
+            ->where( function($q) use ($query) {
+                $q->where('code_bare',    'LIKE', "%{$query}%");
+                $q->orWhere('reference',  'LIKE', "%{$query}%");
+                $q->orWhere('designation','LIKE', "%{$query}%");
+                $q->orWhere('description','LIKE', "%{$query}%");
+                $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
+                $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
+            })  
+            ->whereHas('category', function ($query) use($category) {
+            $query->where('name', $category);
+            }) 
+            ->whereHas('deposit', function ($query) use($depot) {
+            $query->where('name', $depot);
+            })
+            ->paginate(10));
+             return $products;
+                // echo 'depot && category && search';
+            }elseif (isset($query) && isset($depot)) {
+                $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)
+            ->where( function($q) use ($query) {
+                $q->where('code_bare',    'LIKE', "%{$query}%");
+                $q->orWhere('reference',  'LIKE', "%{$query}%");
+                $q->orWhere('designation','LIKE', "%{$query}%");
+                $q->orWhere('description','LIKE', "%{$query}%");
+                $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
+                $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
+            })   
+            ->whereHas('deposit', function ($query) use($depot) {
+            $query->where('name', $depot);
+            })
+            ->paginate(10));
+            return $products;
+                // echo 'query && depot';
+            }
+            elseif (isset($query) && isset($category)) {
+                $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)
+            ->where( function($q) use ($query) {
+                $q->where('code_bare',    'LIKE', "%{$query}%");
+                $q->orWhere('reference',  'LIKE', "%{$query}%");
+                $q->orWhere('designation','LIKE', "%{$query}%");
+                $q->orWhere('description','LIKE', "%{$query}%");
+                $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
+                $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
+            })  
+            ->whereHas('category', function ($query) use($category) {
+            $query->where('name', $category);
+            }) 
+            ->paginate(10));
+        return $products;
+                // echo 'category &&  query';
+            }else{
+                $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)
+            ->where( function($q) use ($query) {
+                $q->where('code_bare',    'LIKE', "%{$query}%");
+                $q->orWhere('reference',  'LIKE', "%{$query}%");
+                $q->orWhere('designation','LIKE', "%{$query}%");
+                $q->orWhere('description','LIKE', "%{$query}%");
+                $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
+                $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
+            })
+            ->paginate(10));
+            return $products;
+                // echo 'query ++';
+            }
         }elseif(isset($category)){
-        //     $products = ProductResource::collection(Product::latest()
-        //     ->where('company_id', $company)
-        //     ->whereHas('category', function ($query) use($category) {
-        //     $query->where('name', $category);
-        //     }) 
-        //     ->paginate(10));
-        // return $products;
-        echo 'category';
+            if(isset($category) && isset($depot)) {
+                $products = ProductResource::collection(Product::latest()
+                ->where('company_id', $company)
+                
+                ->whereHas('category', function ($query) use($category) {
+                $query->where('name', $category);
+                }) 
+                ->whereHas('deposit', function ($query) use($depot) {
+                $query->where('name', $depot);
+                })
+                ->paginate(10));
+            return $products;
+                // echo 'depot && category';
+            }else{
+                $products = ProductResource::collection(Product::latest()
+                ->where('company_id', $company)
+                ->whereHas('category', function ($query) use($category) {
+                $query->where('name', $category);
+                }) 
+                ->paginate(10));
+                return $products;
+                // echo 'category';
+            }
+        }elseif(isset($depot)){
+            $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company)
+            ->whereHas('deposit', function ($query) use($depot) {
+            $query->where('name', $depot);
+            })
+            ->paginate(10));
+        return $products;
+                // echo 'depot'; 
         }
         else{
-        //     $products = ProductResource::collection(Product::latest()
-        //     ->where('company_id', $company) 
-        //     ->paginate(10));
-        // return $products;
-        echo 'all';
+            $products = ProductResource::collection(Product::latest()
+            ->where('company_id', $company) 
+            ->paginate(10));
+        return $products;
+        // echo 'all';
         }
     }
 

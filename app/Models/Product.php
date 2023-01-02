@@ -54,10 +54,10 @@ class Product extends Model
      {
         return $this->belongsTo(Tva::class);
      }
-     public function bonProduct(): ?HasMany
+    
+    public function bonProducts(): ?HasMany
      {
-         return $this->hasMany(BonProduct::class);
+        return $this->hasMany(BonProduct::class);
      }
-
      
 }

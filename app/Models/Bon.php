@@ -49,9 +49,9 @@ class Bon extends Model
         return $this->belongsTo(Deposit::class, 'destination_id');
     }
 
-    public function bonProduct(): ?HasMany
-    {
+    public function bonProducts(): ?HasMany
+     {
         return $this->hasMany(BonProduct::class);
-    }
+     }
 
 }
