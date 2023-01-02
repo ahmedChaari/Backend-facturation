@@ -23,26 +23,27 @@ class BonTransfertController extends Controller
         $bonType   = 'BT' ;
         $valid     = 0 ;
         $bonEntre = Bon::create([   
-            'company_id' => $company, 
-            'source_id' => $request['source_id'],
+            'company_id'     => $company, 
+            'source_id'      => $request['source_id'],
             'destination_id' => $request['destination_id'],
-            'description'=> $request['description'], 
-            'date_bon'   => $request['date_bon'],
-            'user_id'    => $userId,
-            'bon_type'   => $bonType,
-            'reference'  => $reference, 
-            'valid'      => $valid,
-      ]);                  
+            'description'    => $request['description'], 
+            'date_bon'       => $request['date_bon'],
+            'user_id'        => $userId,
+            'bon_type'       => $bonType,
+            'reference'      => $reference, 
+            'valid'          => $valid,
+      ]);
+                       
    // $productArray = explode("," ,$request->products);
    // $bonEntre->products()->attach($productArray);
 
 
 
-   // $componentArray = explode("," ,$request->component_id);
+    // $componentArray = explode("," ,$request->component_id);
     $productArray = explode("," ,$request->products);
-    //$pricearray     = explode("," ,$request->priceC);
+    // $pricearray     = explode("," ,$request->priceC);
     $amountArray     = explode("," ,$request->amount);
-   // $requiredComponentArray     = explode("," ,$request->required_component);
+    // $requiredComponentArray     = explode("," ,$request->required_component);
     $priceArray      = explode("," ,$request->price);
     $index =0 ;
     foreach ($productArray as $productSingle){

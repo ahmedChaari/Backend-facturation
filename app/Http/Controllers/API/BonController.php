@@ -150,22 +150,35 @@ class BonController extends Controller
      public function validBonEntre(Request $request,$id){
 
         $bon = Bon::find($id);
+        $validBon = $request->valid ;
         $bon->update([   
-            'valid'    => $request->valid,
+            'valid'    => $validBon,
           ]); 
 
-          
-     // $productArray = [];
-      $productArray = BonProduct::where('bon_id' , $id)
-      ->get();
+          $amountArray     = explode("," ,$request->amount);
+          $productArray    = explode("," ,$request->products);
+          $index =0 ;
+
+      if ($validBon == 1) {
       
-
-
-
-
+        foreach ($productArray as $productSingle){
+            $product= Product::findOrFail($productSingle);
+            $product->update([   
+              'quantite_initial'     =>   $product->quantite_initial - $amountArray[$index],
+                ]);
+                $index++; 
+        }
+      }elseif($validBon == 0){
+        foreach ($productArray as $productSingle){
+          $product= Product::findOrFail($productSingle);
+          $product->update([   
+            'quantite_initial'     =>   $product->quantite_initial + $amountArray[$index],
+              ]);
+              $index++; 
+        }
+      }
         return response([
-        // $productArray,
-           new  HistoriqueBonResource($productArray),
+           new  BonResource($bon),
           'message'    => 'valid the Bon Entree of company !',
           ], 200); 
      }
