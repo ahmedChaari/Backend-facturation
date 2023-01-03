@@ -15,7 +15,7 @@ class BonResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'     => $this->id,
+            'id'          => $this->id,
             'reference'   => $this->reference,
             'company_id'  => $this->company->name,
             'date_bon'    => $this->date_bon,

@@ -17,6 +17,8 @@ class CreateBonProductTable extends Migration
             $table->id();
             $table->foreignUuid('bon_id')->constrained();
             $table->foreignUuid('product_id')->constrained();
+            $table->foreignUuid('source_id')->nullable()->references('id')->on('deposits');
+            $table->foreignUuid('destination_id')->nullable()->references('id')->on('deposits');
             $table->integer('amount');
             $table->integer('price');
             $table->timestamps();

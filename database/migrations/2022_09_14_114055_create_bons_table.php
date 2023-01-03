@@ -25,8 +25,6 @@ class CreateBonsTable extends Migration
             $table->foreignUuid('user_id');  // user authen
             $table->foreignUuid('vendor_id')->nullable();  // fournisseur
             $table->string('name')->nullable();
-            $table->foreignUuid('source_id')->nullable()->references('id')->on('deposits');
-            $table->foreignUuid('destination_id')->nullable()->references('id')->on('deposits');
             $table->enum('mode_relement',['ES','CQ','VR','CB','EF'])->nullable(); // ESPACE , CHEQUE , VERMENT , CARTE BANCAIRE , effet
             $table->integer('remise')->nullable();
             $table->softDeletes();

@@ -35,10 +35,10 @@ class ProductController extends Controller
                 $q->orWhere('description','LIKE', "%{$query}%");
                 $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
                 $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
-            })  
+            })
             ->whereHas('category', function ($query) use($category) {
             $query->where('name', $category);
-            }) 
+            })
             ->whereHas('deposit', function ($query) use($depot) {
             $query->where('name', $depot);
             })
@@ -59,10 +59,10 @@ class ProductController extends Controller
                 $q->orWhere('description','LIKE', "%{$query}%");
                 $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
                 $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
-            })  
+            })
             ->whereHas('category', function ($query) use($category) {
             $query->where('name', $category);
-            }) 
+            })
             ->whereHas('vendor', function ($query) use($vendor) {
                 $query->where('designation', $vendor);
                 })
@@ -80,7 +80,7 @@ class ProductController extends Controller
                 $q->orWhere('description','LIKE', "%{$query}%");
                 $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
                 $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
-            })  
+            })
             ->whereHas('deposit', function ($query) use($depot) {
             $query->where('name', $depot);
             })
@@ -92,10 +92,10 @@ class ProductController extends Controller
                 // echo 'vendor && Query && depot ';
             }elseif (isset($vendor) && isset($category) && isset($depot)) {
                 $products = ProductResource::collection(Product::latest()
-            ->where('company_id', $company)  
+            ->where('company_id', $company)
             ->whereHas('category', function ($query) use($category) {
             $query->where('name', $category);
-            }) 
+            })
             ->whereHas('deposit', function ($query) use($depot) {
             $query->where('name', $depot);
             })
@@ -107,7 +107,7 @@ class ProductController extends Controller
                 // echo 'vendor && Category && depot ';
             }elseif(isset($vendor) && isset($depot)){
                 $products = ProductResource::collection(Product::latest()
-            ->where('company_id', $company) 
+            ->where('company_id', $company)
             ->whereHas('deposit', function ($query) use($depot) {
             $query->where('name', $depot);
             })
@@ -136,16 +136,16 @@ class ProductController extends Controller
                 // echo 'vendor && Query';
             }elseif (isset($vendor) && isset($category)) {
                 $products = ProductResource::collection(Product::latest()
-            ->where('company_id', $company)  
+            ->where('company_id', $company)
             ->whereHas('category', function ($query) use($category) {
             $query->where('name', $category);
-            }) 
+            })
             ->whereHas('vendor', function ($query) use($vendor) {
                 $query->where('designation', $vendor);
                 })
             ->paginate(10));
             return $products;
-                // echo'vendor && category'; 
+                // echo'vendor && category';
             }
             else{
                 $products = ProductResource::collection(Product::latest()
@@ -169,10 +169,10 @@ class ProductController extends Controller
                 $q->orWhere('description','LIKE', "%{$query}%");
                 $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
                 $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
-            })  
+            })
             ->whereHas('category', function ($query) use($category) {
             $query->where('name', $category);
-            }) 
+            })
             ->whereHas('deposit', function ($query) use($depot) {
             $query->where('name', $depot);
             })
@@ -189,7 +189,7 @@ class ProductController extends Controller
                 $q->orWhere('description','LIKE', "%{$query}%");
                 $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
                 $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
-            })   
+            })
             ->whereHas('deposit', function ($query) use($depot) {
             $query->where('name', $depot);
             })
@@ -207,10 +207,10 @@ class ProductController extends Controller
                 $q->orWhere('description','LIKE', "%{$query}%");
                 $q->orWhere('rayon_a',    'LIKE', "%{$query}%");
                 $q->orWhere('rayon_b',    'LIKE', "%{$query}%");
-            })  
+            })
             ->whereHas('category', function ($query) use($category) {
             $query->where('name', $category);
-            }) 
+            })
             ->paginate(10));
         return $products;
                 // echo 'category &&  query';
@@ -233,10 +233,10 @@ class ProductController extends Controller
             if(isset($category) && isset($depot)) {
                 $products = ProductResource::collection(Product::latest()
                 ->where('company_id', $company)
-                
+
                 ->whereHas('category', function ($query) use($category) {
                 $query->where('name', $category);
-                }) 
+                })
                 ->whereHas('deposit', function ($query) use($depot) {
                 $query->where('name', $depot);
                 })
@@ -248,7 +248,7 @@ class ProductController extends Controller
                 ->where('company_id', $company)
                 ->whereHas('category', function ($query) use($category) {
                 $query->where('name', $category);
-                }) 
+                })
                 ->paginate(10));
                 return $products;
                 // echo 'category';
@@ -261,11 +261,11 @@ class ProductController extends Controller
             })
             ->paginate(10));
         return $products;
-                // echo 'depot'; 
+                // echo 'depot';
         }
         else{
             $products = ProductResource::collection(Product::latest()
-            ->where('company_id', $company) 
+            ->where('company_id', $company)
             ->paginate(10));
         return $products;
         // echo 'all';
@@ -286,8 +286,8 @@ class ProductController extends Controller
         Storage::disk('public')->put('product/'.$safeName, $image);
         $path     = env('APP_URL').'/storage/product/'.$safeName;
 
-      $product = Product::create([   
-          'company_id'      => $company, 
+      $product = Product::create([
+          'company_id'      => $company,
           'user_id'         => $Userid,
           'path_image'      => $path,
           'reference'       => $request['reference'],
@@ -299,7 +299,7 @@ class ProductController extends Controller
           'unite'           => $request['unite'],
           'code_bare'       => $request['code_bare'],
           'stock_min'       => $request['stock_min'],
-          'TVA'             => $request['TVA'],
+          'tva_id'          => $request['tva_id'],
           'actif'           => $request['actif'],
           'rayon_a'         => $request['rayon_a'],
           'rayon_b'         => $request['rayon_b'],
@@ -307,12 +307,12 @@ class ProductController extends Controller
           'quantite_initial'=> $request['quantite_initial'],
           'description'     => $request['description'],
     ]);
-   
+
     //dd($product);
     return response([
       $product,
       'message'    => 'create a new product !',
-      ], 200); 
+      ], 200);
 
     }
 
@@ -320,14 +320,14 @@ class ProductController extends Controller
 
         if ( $request->has('path_image')) {
             //get the base-64 from data
-            
+
             $image = $request->path_image;
             $image = base64_decode($image);
-            
+
             $safeName = Str::random(10).'.'.'png';
             Storage::disk('public')->put('product/'.$safeName, $image);
             $path = env('APP_URL').'/storage/product/'.$safeName;
-            $product->update([   
+            $product->update([
                 'path_image'      => $path,
                 'reference'       => $request->reference,
                 'vendor_id'       => $request->vendor_id,
@@ -347,7 +347,7 @@ class ProductController extends Controller
                 'description'     => $request->description,
             ]);
         }else {
-            $product->update([   
+            $product->update([
                 'reference'       => $request->reference,
                 'vendor_id'       => $request->vendor_id,
                 'designation'     => $request->designation,
@@ -370,7 +370,7 @@ class ProductController extends Controller
     return response([
       $product,
       'message'    => 'create a new product !',
-      ], 200); 
+      ], 200);
 
     }
      //delete Product
@@ -394,6 +394,6 @@ class ProductController extends Controller
          return response([
              'message'    => 'The Deposit was Restored',
              ], 401);
-     
-     }  
+
+     }
 }

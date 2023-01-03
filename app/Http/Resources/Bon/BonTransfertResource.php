@@ -15,8 +15,6 @@ class BonTransfertResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'depot source'     => $this->source,
-            'depot destination'=> $this->destination,
             'id'               => $this->id,
             'reference'        => $this->reference,
             'company_id'       => $this->company->name,

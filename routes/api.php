@@ -43,14 +43,14 @@ Route::post('resetPassword',        [NewPasswordController::class, 'resetPasswor
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('logout',              [AuthController::class, 'logout']);
-    
+
     //user controller
     Route::post('storeClient',         [UserController::class, 'storeClient']);
     Route::put('updateClient/{user}',  [UserController::class, 'updateClient']);
     Route::get('listUsers',            [UserController::class, 'listUsers']);
     Route::delete('user/delete/{id}',  [UserController::class, 'delete']);
     Route::put('user/restore/{id}',    [UserController::class, 'restore']);
-    
+
     // depot controller
     Route::post('storeDeposit',          [DepositController::class, 'storeDeposit']);
     Route::get('listDeposits',           [DepositController::class, 'listDeposits']);
@@ -87,18 +87,18 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
      Route::get('listCountries',       [ParametreController::class, 'listCountries']);
      Route::get('listCities',          [ParametreController::class, 'listCities']);
 
-    //agences 
+    //agences
     Route::post('storeAgence',         [AgenceController::class, 'storeAgence']);
     Route::get('listAgences',          [AgenceController::class, 'listAgences']);
     Route::delete('deleteAgence/{id}', [AgenceController::class, 'deleteAgence']);
     Route::put('updateAgence/{agence}',[AgenceController::class, 'updateAgence']);
 
-    //client type 
+    //client type
     Route::get('listClientTypes',      [ClientTypeController::class, 'listClientTypes']);
     Route::post('storeClientType',     [ClientTypeController::class, 'storeClientType']);
     Route::put('updateClientType/{clientType}',[ClientTypeController::class, 'updateClientType']);
 
-    //unity 
+    //unity
     Route::get('listUnities',        [UnityController::class, 'listUnities']);
     Route::post('storeUnity',        [UnityController::class, 'storeUnity']);
     Route::put('updateUnity/{unity}',[UnityController::class, 'updateUnity']);
@@ -126,6 +126,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // bon Transfert
     Route::get('listBonSorties',        [BonTransfertController::class, 'listBonSorties']);
     Route::post('storeBonTransfert',    [BonTransfertController::class, 'storeBonTransfert']);
+    Route::put('validBonTransfer/{id}',     [BonTransfertController::class, 'validBonTransfer']);
 
     //bon Historique
     Route::get('getHistoriqueProductBon',[BonController::class, 'getHistoriqueProductBon']);
@@ -148,5 +149,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Tva
     Route::get('listTvas/',             [TvaController::class, 'listTvas']);
-    
+
 });
