@@ -24,7 +24,7 @@ class ProductFactory extends Factory
             'company_id'   => Company::all()->random()->id,
             'user_id'      => User::all()->random()->id,
           //  'path_image'   => $this->faker->image('public/storage/image/product', 400, 300, null, true),
-            'reference'    => $this->faker->name,
+           // 'reference'    => $this->faker->name,
             'vendor_id'    => Vendor::all()->random()->id,
             'designation'  => $this->faker->paragraph(),
             'prix_achat'   => $this->faker->randomFloat(3, 0, 100),

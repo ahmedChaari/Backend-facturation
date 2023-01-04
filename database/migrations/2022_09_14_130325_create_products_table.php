@@ -15,10 +15,11 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->integer('reference'); // auto increment
+
             $table->foreignUuid('company_id');
             $table->foreignUuid('user_id');
             $table->string('path_image')->nullable();
-            $table->string('reference');
             $table->foreignUuid('vendor_id');  // fournisseur
             $table->text('designation');
             $table->integer('prix_achat');
@@ -38,6 +39,8 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->softDeletes();
             $table->timestamps();
+
+
         });
     }
 

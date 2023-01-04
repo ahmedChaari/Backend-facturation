@@ -286,11 +286,14 @@ class ProductController extends Controller
         Storage::disk('public')->put('product/'.$safeName, $image);
         $path     = env('APP_URL').'/storage/product/'.$safeName;
 
+        $reference = rand(1, 1000000);
+
+
       $product = Product::create([
           'company_id'      => $company,
           'user_id'         => $Userid,
           'path_image'      => $path,
-          'reference'       => $request['reference'],
+          'reference'       => $reference,
           'vendor_id'       => $request['vendor_id'],
           'designation'     => $request['designation'],
           'prix_achat'      => $request['prix_achat'],

@@ -25,7 +25,6 @@ class CreateProductRequest extends FormRequest
     {
         return [
             'path_image'      => 'required',
-            'reference'       => 'required',
             'vendor_id'       => 'required',
             'designation'     => 'nullable',
             'prix_achat'      => 'nullable|numeric',
@@ -34,7 +33,7 @@ class CreateProductRequest extends FormRequest
             'unite'           => 'required|in:kg,metre,littre,piece',
             'code_bare'       => 'required',
             'stock_min'       => 'required',
-            'TVA'             => 'required',
+            'tva_id'          => 'required',
             'actif'           => 'required|boolean',
             'rayon_a'         => 'nullable',
             'rayon_b'         => 'nullable',
