@@ -28,14 +28,14 @@ class ProductResource extends JsonResource
             'unite'       => $this->unite,
             'code_bare'   => $this->code_bare,
             'stock_min'   => $this->stock_min,
-            'tva_id'      => $this->tva->number,
+            'tva_id'      => $this->tva,
             'actif'       => $this->actif,
             'rayon_a'     => $this->rayon_a,
             'rayon_b'     => $this->rayon_b,
             'deposit_id'  => $this->deposit->name,
             'quantite_initial' => $this->quantite_initial,
             'description'      => $this->description,
-            
+
         ];
     }
 }

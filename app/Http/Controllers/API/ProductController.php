@@ -396,4 +396,9 @@ class ProductController extends Controller
              ], 401);
 
      }
+     //** list of product for My stock
+     // */
+     public function listMonStock(){
+
+     }
 }
