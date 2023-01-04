@@ -25,14 +25,14 @@ class UserController extends Controller
     // serch for all search name and role and depot
         if(isset($depot) && isset($query) && isset($role) ){
           $users = UserResource::collection(User::latest()
-            ->where('company_id', $company) 
+            ->where('company_id', $company)
             ->where( function($q) use ($query) {
               $q->where('nom', 'LIKE',"%{$query}%");
               $q->orWhere('prenom','LIKE', "%{$query}%");
-              })  
+              })
               ->whereHas('role', function ($query) use($role) {
                 $query->where('name', $role);
-            }) 
+            })
               ->whereHas('deposit', function ($query) use($depot) {
                 $query->where('name', $depot);
                 })
@@ -41,11 +41,11 @@ class UserController extends Controller
          // serch for all search name  and depot
         }elseif(isset($depot) && isset($query)){
           $users = UserResource::collection(User::latest()
-            ->where('company_id', $company) 
+            ->where('company_id', $company)
             ->where( function($q) use ($query) {
               $q->where('nom', 'LIKE',"%{$query}%");
               $q->orWhere('prenom','LIKE', "%{$query}%");
-              })  
+              })
               ->whereHas('deposit', function ($query) use($depot) {
                 $query->where('name', $depot);
                 })
@@ -54,10 +54,10 @@ class UserController extends Controller
          // serch for role and depot
         }elseif(isset($depot) && isset($role)){
           $users = UserResource::collection(User::latest()
-          ->where('company_id', $company) 
+          ->where('company_id', $company)
             ->whereHas('role', function ($query) use($role) {
               $query->where('name', $role);
-          }) 
+          })
               ->whereHas('deposit', function ($query) use($depot) {
                 $query->where('name', $depot);
                 })
@@ -66,39 +66,39 @@ class UserController extends Controller
          // serch for search name and role
         }elseif(isset($query) && isset($role)){
           $users = UserResource::collection(User::latest()
-          ->where('company_id', $company) 
+          ->where('company_id', $company)
             ->where( function($q) use ($query) {
               $q->where('nom', 'LIKE',"%{$query}%");
               $q->orWhere('prenom','LIKE', "%{$query}%");
-              })  
+              })
               ->whereHas('role', function ($query) use($role) {
                 $query->where('name', $role);
-            }) 
+            })
             ->paginate(10));
             return $users;
-             // serch for search name 
+             // serch for search name
         }elseif(isset($query)) {
           $users = UserResource::collection(User::latest()
-            ->where('company_id', $company)    
+            ->where('company_id', $company)
           ->where( function($q) use ($query) {
               $q->where('nom', 'LIKE',"%{$query}%");
               $q->orWhere('prenom','LIKE', "%{$query}%");
-              }) 
-        
+              })
+
             ->paginate(10));
         return $users;
-         // serch for role 
+         // serch for role
         }elseif(isset($role) && !isset($query)){
           $users = UserResource::collection(User::latest()
-          ->where('company_id', $company) 
+          ->where('company_id', $company)
               ->whereHas('role', function ($query) use($role) {
                 $query->where('name', $role);
-            }) 
+            })
             ->paginate(10));
              // serch for depot
         }elseif(isset($depot) && !isset($query) && !isset($role)){
           $users = UserResource::collection(User::latest()
-          ->where('company_id', $company) 
+          ->where('company_id', $company)
            ->whereHas('deposit', function ($query) use($depot) {
                 $query->where('name', $depot);
                 })
@@ -106,10 +106,10 @@ class UserController extends Controller
       // get all user for company
         }else{
           $users = UserResource::collection(User::latest()
-          ->where('company_id', $company) 
+          ->where('company_id', $company)
             ->paginate(10));
         return $users;
-        }   
+        }
   }
 
     public function storeClient(UserRequest $request)
@@ -128,7 +128,7 @@ class UserController extends Controller
         $userId     = Auth::user()->id;
         $user       = User::create([
                 'nom'        => $request['nom'],
-                'prenom'     => $request['prenom'], 
+                'prenom'     => $request['prenom'],
                 'email'      => $request['email'],
                 'gender'     => $request['gender'],
                 'path_image' => $path,
@@ -142,32 +142,32 @@ class UserController extends Controller
             ]);
 
           //  $comp = $request->tags;
-            //if (empty($comp)){}else{                        
-                
+            //if (empty($comp)){}else{
+
             $companyArray = explode("," ,$request->companies);
             $user->companies()->attach($companyArray);
-      
+
         return response([
             $user,
             'message'    => 'create a new client of company !',
-            ], 200);   
+            ], 200);
     }
     public function updateClient(UpdateUserRequest $request,User $user){
 
 
       if ( $request->has('path_image')) {
         //get the base-64 from data
-        
+
         $image = $request->path_image;
         $image = base64_decode($image);
-        
+
         $safeName = Str::random(10).'.'.'png';
         Storage::disk('public')->put('product/'.$safeName, $image);
         $path = env('APP_URL').'/storage/product/'.$safeName;
 
-      $user->update([   
+      $user->update([
         'nom'        => $request['nom'],
-        'prenom'     => $request['prenom'], 
+        'prenom'     => $request['prenom'],
         'path_image' => $path,
         'email'      => $request['email'],
         'gender'     => $request['gender'],
@@ -177,9 +177,9 @@ class UserController extends Controller
         'password'   => bcrypt($request['password']),
     ]);
   }else {
-    $user->update([   
+    $user->update([
       'nom'        => $request['nom'],
-      'prenom'     => $request['prenom'], 
+      'prenom'     => $request['prenom'],
       'email'      => $request['email'],
       'gender'     => $request['gender'],
       'adresse'    => $request['adresse'],
@@ -191,7 +191,7 @@ class UserController extends Controller
     return response([
       new  UserResource($user),
       'message'    => 'update a client of company !',
-      ], 200); 
+      ], 200);
 
     }
 
@@ -213,7 +213,7 @@ class UserController extends Controller
     public function restore($id)
     {
         if (Auth::user()->role_id == '1') {
-          
+
             User::withTrashed()->find($id)->restore();
             return response([
                 'message'    => 'The User was Restored',
@@ -223,5 +223,19 @@ class UserController extends Controller
                 'message'    => 'you do not have any permission for restore !',
                     ], 400);
         }
-    }  
+    }
+    // show user
+    public function showUser($id){
+       $user = User::findOrFail($id);
+       if (isset($user)) {
+        return response([
+            $user,
+            'message'    => 'The User was find it',
+            ], 201);
+       }else {
+        return response([
+            'message'    => 'The User was find it',
+            ], 401);
+       }
+    }
 }

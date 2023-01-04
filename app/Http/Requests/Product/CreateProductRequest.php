@@ -29,7 +29,7 @@ class CreateProductRequest extends FormRequest
             'designation'     => 'nullable',
             'prix_achat'      => 'nullable|numeric',
             'prix_vente'      => 'nullable|numeric',
-            'category_id'     => 'required',
+          //  'category_id'     => 'required',
             'unite'           => 'required|in:kg,metre,littre,piece',
             'code_bare'       => 'required',
             'stock_min'       => 'required',

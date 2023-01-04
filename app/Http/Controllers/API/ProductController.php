@@ -298,7 +298,7 @@ class ProductController extends Controller
           'designation'     => $request['designation'],
           'prix_achat'      => $request['prix_achat'],
           'prix_vente'      => $request['prix_vente'],
-          'category_id'     => $request['category_id'],
+          //'category_id'     => $request['category_id'],
           'unite'           => $request['unite'],
           'code_bare'       => $request['code_bare'],
           'stock_min'       => $request['stock_min'],
@@ -311,6 +311,8 @@ class ProductController extends Controller
           'description'     => $request['description'],
     ]);
 
+    $categoryArray = explode("," ,$request->categories);
+    $product->categories()->attach($categoryArray);
     //dd($product);
     return response([
       $product,
@@ -337,7 +339,7 @@ class ProductController extends Controller
                 'designation'     => $request->designation,
                 'prix_achat'      => $request->prix_achat,
                 'prix_vente'      => $request->prix_vente,
-                'category_id'     => $request->category_id,
+               // 'category_id'     => $request->category_id,
                 'unite'           => $request->unite,
                 'code_bare'       => $request->code_bare,
                 'stock_min'       => $request->stock_min,
@@ -349,6 +351,7 @@ class ProductController extends Controller
                 'quantite_initial'=> $request->quantite_initial,
                 'description'     => $request->description,
             ]);
+
         }else {
             $product->update([
                 'reference'       => $request->reference,
@@ -356,7 +359,7 @@ class ProductController extends Controller
                 'designation'     => $request->designation,
                 'prix_achat'      => $request->prix_achat,
                 'prix_vente'      => $request->prix_vente,
-                'category_id'     => $request->category_id,
+               // 'category_id'     => $request->category_id,
                 'unite'           => $request->unite,
                 'code_bare'       => $request->code_bare,
                 'stock_min'       => $request->stock_min,

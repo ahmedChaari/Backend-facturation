@@ -16,7 +16,6 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->integer('reference'); // auto increment
-
             $table->foreignUuid('company_id');
             $table->foreignUuid('user_id');
             $table->string('path_image')->nullable();
@@ -24,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->text('designation');
             $table->integer('prix_achat');
             $table->integer('prix_vente');
-            $table->foreignUuid('category_id');
+            //$table->foreignUuid('category_id');
             //$table->string('image');
             $table->enum('unite',['kg','metre','littre','piece']);
             $table->bigInteger('code_bare');
@@ -39,8 +38,6 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->softDeletes();
             $table->timestamps();
-
-
         });
     }
 

@@ -14,13 +14,13 @@ class Category extends Model
     use Uuids ,HasFactory, SoftDeletes;
     protected $guarded = [];
 
-
     public function company(): ?BelongsTo
     {
         return $this->belongsTo(Company::class);
     }
-    public function products(): ?HasMany
+
+    public function products(): ?BelongsToMany
      {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class);
      }
 }

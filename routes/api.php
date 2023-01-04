@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('listUsers',            [UserController::class, 'listUsers']);
     Route::delete('user/delete/{id}',  [UserController::class, 'delete']);
     Route::put('user/restore/{id}',    [UserController::class, 'restore']);
+    Route::get('showUser/{id}',        [UserController::class, 'showUser']);
 
     // depot controller
     Route::post('storeDeposit',          [DepositController::class, 'storeDeposit']);

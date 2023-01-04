@@ -19,10 +19,12 @@ class Product extends Model
     {
         return $this->belongsTo(Company::class);
     }
-    public function category(): ?BelongsTo
+    //
+    public function categories(): ?BelongsToMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
+
     public function vendor(): ?BelongsTo
     {
         return $this->belongsTo(Vendor::class);
@@ -38,13 +40,14 @@ class Product extends Model
 
     public function bons(): ?BelongsToMany
     {
-      return $this->belongsToMany(Bon::class); 
+      return $this->belongsToMany(Bon::class);
     }
 
     public function demandPrices(): ?BelongsToMany
     {
-      return $this->belongsToMany(DemandPrice::class); 
+      return $this->belongsToMany(DemandPrice::class);
     }
+
     public function demandPriceProducts(): ?HasMany
     {
        return $this->hasMany(Vendor::class);
@@ -54,10 +57,10 @@ class Product extends Model
      {
         return $this->belongsTo(Tva::class);
      }
-    
+
     public function bonProducts(): ?HasMany
      {
         return $this->hasMany(BonProduct::class);
      }
-     
+
 }
