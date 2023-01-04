@@ -16,7 +16,7 @@ class TvaResource extends JsonResource
     {
         return [
             'number' => $this->number,
-           // 'company_id' => $this->company_id,
+            'id'   => $this->id,
         ];
     }
 }
