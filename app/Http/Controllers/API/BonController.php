@@ -607,7 +607,7 @@ class BonController extends Controller
             ], 201);
     }
 
-    public function getHistoriqueProductBon(Request $request){
+    public function listhistoriqueProductBon(Request $request){
 
         $query    =  $request->get('search');
         $company  = Auth::user()->company_id;

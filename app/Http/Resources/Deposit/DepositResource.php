@@ -16,7 +16,7 @@ class DepositResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'company'=> $this->company,
+            'company'=> $this->company->name,
            // 'created_at' =>$this->created_at,
             'DATE CRÉATION' => $this->created_at->format('m/d/Y'),
         ];

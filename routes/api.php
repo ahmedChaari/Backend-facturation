@@ -129,7 +129,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('validBonTransfer/{id}',     [BonTransfertController::class, 'validBonTransfer']);
 
     //bon Historique
-    Route::get('getHistoriqueProductBon',[BonController::class, 'getHistoriqueProductBon']);
+    Route::get('listhistoriqueProductBon',[BonController::class, 'listhistoriqueProductBon']);
 
     //vendor
     Route::get('listVendor',             [VendorController::class, 'listVendor']);

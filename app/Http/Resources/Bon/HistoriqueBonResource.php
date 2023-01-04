@@ -16,8 +16,13 @@ class HistoriqueBonResource extends JsonResource
     {
         return [
             'id'              => $this->id,
-            'product_id'      => $this->product_id,
-            'bon_id'          => $this->bon_id,
+            'reference'       => $this->product->reference,
+            'category'        => $this->product->category_id,
+            'date bon'        => $this->bon->date_bon,
+            'type bon'        => $this->bon->bon_type,
+            'quantite'        => $this->amount,
+            'reference bon'   => $this->bon->reference,
+            'date de creation'=> $this->created_at,
         ];
     }
 }
