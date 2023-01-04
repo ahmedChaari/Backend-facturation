@@ -47,7 +47,7 @@ class ProductController extends Controller
                 })
             ->paginate(10));
         return $products;
-        echo 'search for All paramettre' ;
+        //echo 'search for All paramettre' ;
         }elseif (isset($vendor) ) {
             if (isset($category) && isset($query) && isset($vendor)){
                 $products = ProductResource::collection(Product::latest()

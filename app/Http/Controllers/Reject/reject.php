@@ -22,18 +22,18 @@ class BonTransfertController extends Controller
         $reference = 'BT'.$date.'-'.rand(10000,100);
         $bonType   = 'BT' ;
         $valid     = 0 ;
-        $bonEntre = Bon::create([   
-            'company_id'     => $company, 
+        $bonEntre = Bon::create([
+            'company_id'     => $company,
             'source_id'      => $request['source_id'],
             'destination_id' => $request['destination_id'],
-            'description'    => $request['description'], 
+            'description'    => $request['description'],
             'date_bon'       => $request['date_bon'],
             'user_id'        => $userId,
             'bon_type'       => $bonType,
-            'reference'      => $reference, 
+            'reference'      => $reference,
             'valid'          => $valid,
       ]);
-                       
+
    // $productArray = explode("," ,$request->products);
    // $bonEntre->products()->attach($productArray);
 
@@ -55,15 +55,15 @@ class BonTransfertController extends Controller
         $BnProduct->save();
 
         $product= Product::findOrFail($BnProduct->product_id);
-        $product->update([   
+        $product->update([
             'quantite_initial'     =>  $amountArray[$index],
             ]);
-        $index++; 
+        $index++;
     }
 
        // foreach ($productArray as $ProductSingle){
        //     $product= Product::findOrFail($ProductSingle);
-       //     $product->update([   
+       //     $product->update([
              //   'deposit_id'     =>  $bonEntre->destination_id,
       //          ]);
      //   }
@@ -71,7 +71,7 @@ class BonTransfertController extends Controller
       return response([
         new  BonTransfertResource($bonEntre),
         'message'    => 'create a new Bon Transfert !',
-        ], 200); 
+        ], 200);
      }
 
 
@@ -95,7 +95,7 @@ dd($array);
 
 //  foreach ($productArray as $productSingle){
 
-  
+
 
  //$id = $productSingle->product_id  ;
 
@@ -104,8 +104,10 @@ dd($array);
 
       //dd($productId);
     //  $index =0 ;
-    //    Product::update([   
+    //    Product::update([
     //     'quantite_initial'     =>  $productSingle->amount[$index],
     //     ]);
-    // $index++; 
+    // $index++;
 // }
+
+
