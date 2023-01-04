@@ -16,21 +16,23 @@ class RoleController extends Controller
         $company  = Auth::user()->company_id;
         if (isset($query)) {
             $roles = RoleResource::collection(Role::latest()
-                ->where('name', $company)
+                ->where('company_id', $company)
+                ->orWhere('company_id', null)
                 ->where( function($q) use ($query) {
                     $q->where('name', 'LIKE',"%{$query}%");
-                    })  
+                    })
                 ->paginate(10));
             return $roles;
         }else{
             $roles = RoleResource::collection(Role::latest()
-                ->where('company_id', $company) 
+                ->where('company_id', $company)
+                ->orWhere('company_id', null)
                 ->paginate(10));
             return $roles;
         }
     }
-    // get name 
-    function getlibelle($value){               
+    // get name
+    function getlibelle($value){
         $name =  ucfirst(mb_substr($value, 0, 1));
         $pieces = explode(" ", $value);
         $name2 =  ucfirst(mb_substr($pieces[1], 0, 1));
@@ -44,26 +46,26 @@ class RoleController extends Controller
         $role         = Role::create([
             'name'        => $request['name'],
             'descreption' => $this->getlibelle($value),
-            'company_id'  => $company, 
+            'company_id'  => $company,
         ]);
         return response([
             $role,
             'message'    => 'create a new Role of company !',
-            ], 200); 
+            ], 200);
     }
 
      //update Role
      public function updateRole(RoleRequest $request,Role $role){
 
         $value    = $request['name'];
-        $role->update([   
+        $role->update([
           'name'        => $request['name'],
           'descreption' => $this->getlibelle($value),
-        ]); 
+        ]);
       return response([
         $role,
         'message'    => 'update a category of company !',
-        ], 200); 
+        ], 200);
       }
 
        //delete Deposit
@@ -89,6 +91,6 @@ class RoleController extends Controller
         return response([
             'message'    => 'The Role was Restored',
             ], 201);
-    
-    } 
+
+    }
 }
