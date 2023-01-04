@@ -15,6 +15,7 @@ class DepositResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'company'=> $this->company->name,
            // 'created_at' =>$this->created_at,
