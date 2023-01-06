@@ -234,7 +234,7 @@ class UserController extends Controller
             ], 201);
        }else {
         return response([
-            'message'    => 'The User was find it',
+            'message'    => 'The User does not existing',
             ], 401);
        }
     }

@@ -35,6 +35,7 @@ class ProductResource extends JsonResource
             'deposit_id'  => $this->deposit,
             'quantite_initial' => $this->quantite_initial,
             'description'      => $this->description,
+            'created_at' => $this->created_at,
 
         ];
     }

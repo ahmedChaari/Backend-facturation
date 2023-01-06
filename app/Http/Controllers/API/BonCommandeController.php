@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class BonCommandeController extends Controller
 {
+    //** creation des bon command */
     public function storeBonCommande(Request $request){
 
         $company  = Auth::user()->company_id;
@@ -18,15 +19,15 @@ class BonCommandeController extends Controller
         $reference = 'BC'.$date.'-'.rand(10000,100);
         $bonType = 'BC' ;
         $valid = 0 ;
-        $bonCommande = Bon::create([   
-            'company_id' => $company, 
+        $bonCommande = Bon::create([
+            'company_id' => $company,
             'vendor_id'  => $request['vendor_id'],
             'date_bon'   => $request['date_bon'],
             'user_id'    => $request['user_id'],
             'bon_type'   => $bonType,
-            'reference'  => $reference, 
-            'valid'      => $valid, 
-      ]);                  
+            'reference'  => $reference,
+            'valid'      => $valid,
+      ]);
 
     $productArray    = explode("," ,$request->products);
     $amountArray     = explode("," ,$request->amount);
@@ -39,13 +40,51 @@ class BonCommandeController extends Controller
         $BnProduct->price       = $priceArray[$index];
         $BnProduct->amount      = $amountArray[$index];
         $BnProduct->save();
-        $index++; 
+        $index++;
     }
       return response([
         $bonCommande,
         // new  BonResource($bonEntre),
         'message'    => 'create a new Bon Entree !',
-        ], 200); 
+        ], 200);
      }
-     
+
+     //** valider bon command */
+     public function validBonCommande(Request $request,$id){
+
+        $bon = Bon::find($id);
+        $validBon = $request->valid ;
+        $bon->update([
+            'valid'    => $validBon,
+          ]);
+
+          $amountArray     = explode("," ,$request->amount);
+          $productArray    = explode("," ,$request->products);
+          $index =0 ;
+
+      if ($validBon == 1) {
+
+        foreach ($productArray as $productSingle){
+            $product= Product::findOrFail($productSingle);
+            $product->update([
+              'quantite_initial'     =>   $product->quantite_initial - $amountArray[$index],
+                ]);
+                $index++;
+        }
+      }elseif($validBon == 0){
+        foreach ($productArray as $productSingle){
+          $product= Product::findOrFail($productSingle);
+          $product->update([
+            'quantite_initial'     =>   $product->quantite_initial + $amountArray[$index],
+              ]);
+              $index++;
+        }
+      }
+        return response([
+           new  BonResource($bon),
+          'message'    => 'valid the Bon Entree of company !',
+          ], 200);
+     }
+
+
 }
